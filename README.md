@@ -1,4 +1,4 @@
-# **AttendanceBOT**
+# AttendanceBOT
 
 ## Equipe
 1. GHISOTTI Tiziano
