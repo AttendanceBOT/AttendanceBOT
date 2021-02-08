@@ -8,6 +8,6 @@ export default class TestCommand extends BaseCommand {
     }
 
     async run(client: DiscordClient, message: Message) {
-        message.channel.send(`Test command works`);
+        message.channel.send(`Test command works -travis-`);
     }
 }
