@@ -20,8 +20,6 @@ config.xml
 
 /**/.idea/*
 
-.env
-
 webpack/*.js
 
 slappey.json

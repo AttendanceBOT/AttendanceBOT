@@ -19,10 +19,12 @@ module.exports = {
             'SwitchCase': 1,
             'offsetTernaryExpressions': false,
         }],
-
         'quotes': 'off',
         '@typescript-eslint/quotes': ['error', 'backtick'],
-
+        "@typescript-eslint/no-inferrable-types": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/no-unsafe-call": "off",
+        "@typescript-eslint/require-await": 1,
         'block-spacing': 'error',
         'comma-dangle': ['error', 'always-multiline'],
         'comma-spacing': 'error',
