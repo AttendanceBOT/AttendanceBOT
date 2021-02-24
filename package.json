@@ -1,0 +1,37 @@
+{
+  "name": "attendance_bot",
+  "version": "1.0.0",
+  "description": "AttendanceBot, le bot Discord qui s'occupe des présences de vos élèves.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "watch": "tsc -p tsconfig.json -w",
+    "test": "mocha -r ts-node/register \"tests/**/*.spec.ts\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AttendanceBOT/AttendanceBOT.git"
+  },
+  "author": "GHISOTTI Tiziano, MAHOLIDA Christelle, MARECAR Sarah, RAKOTONIRINA Onitiana et TANG François",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AttendanceBOT/AttendanceBOT/issues"
+  },
+  "homepage": "https://github.com/AttendanceBOT/AttendanceBOT#readme",
+  "dependencies": {
+    "@types/node": "^14.14.31",
+    "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0",
+    "inversify": "^5.0.5",
+    "reflect-metadata": "^0.1.13",
+    "typescript": "^4.1.5"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.15",
+    "@types/mocha": "^8.2.1",
+    "chai": "^4.3.0",
+    "mocha": "^8.3.0",
+    "ts-mockito": "^2.6.1",
+    "ts-node": "^9.1.1"
+  }
+}
