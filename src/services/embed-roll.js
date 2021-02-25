@@ -21,17 +21,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MessageResponder = void 0;
+exports.EmbedRoll = void 0;
 const ping_finder_1 = require("./ping-finder");
 const inversify_1 = require("inversify");
 const types_1 = require("../../types");
-let MessageResponder = class MessageResponder {
+let EmbedRoll = class EmbedRoll {
     constructor(pingFinder) {
         this.pingFinder = pingFinder;
     }
     handle(message) {
         var _a;
-        if (this.pingFinder.isPing(message.content) && ((_a = message.member.roles) === null || _a === void 0 ? void 0 : _a.cache.find(r => r.name === "Professeur"))) {
+        if (this.pingFinder.isTriggerCommand(message.content) && ((_a = message.member.roles) === null || _a === void 0 ? void 0 : _a.cache.find(r => r.name === "Professeur"))) {
             message.channel.send({
                 embed: {
                     color: 3447003,
@@ -44,10 +44,10 @@ let MessageResponder = class MessageResponder {
         return Promise.reject();
     }
 };
-MessageResponder = __decorate([
+EmbedRoll = __decorate([
     inversify_1.injectable(),
     __param(0, inversify_1.inject(types_1.TYPES.PingFinder)),
     __metadata("design:paramtypes", [ping_finder_1.PingFinder])
-], MessageResponder);
-exports.MessageResponder = MessageResponder;
-//# sourceMappingURL=message-responder.js.map
+], EmbedRoll);
+exports.EmbedRoll = EmbedRoll;
+//# sourceMappingURL=embed-roll.js.map

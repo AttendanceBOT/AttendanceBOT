@@ -13,7 +13,7 @@ require("reflect-metadata");
 require("mocha");
 const chai_1 = require("chai");
 const ping_finder_1 = require("../../src/services/ping-finder");
-const message_responder_1 = require("../../src/services/message-responder");
+const embed_roll_1 = require("../services/embed-roll");
 const ts_mockito_1 = require("ts-mockito");
 const discord_js_1 = require("discord.js");
 describe('MessageResponder', () => {
@@ -28,7 +28,7 @@ describe('MessageResponder', () => {
         mockedMessageClass = ts_mockito_1.mock(discord_js_1.Message);
         mockedMessageInstance = ts_mockito_1.instance(mockedMessageClass);
         setMessageContents();
-        service = new message_responder_1.MessageResponder(mockedPingFinderInstance);
+        service = new embed_roll_1.EmbedRoll(mockedPingFinderInstance);
     });
     it('should reply', () => __awaiter(void 0, void 0, void 0, function* () {
         whenIsPingThenReturn(true);
@@ -49,7 +49,7 @@ describe('MessageResponder', () => {
         mockedMessageInstance.content = "Non-empty string";
     }
     function whenIsPingThenReturn(result) {
-        ts_mockito_1.when(mockedPingFinderClass.isPing("Non-empty string")).thenReturn(result);
+        ts_mockito_1.when(mockedPingFinderClass.isTriggerCommand("Non-empty string")).thenReturn(result);
     }
 });
 //# sourceMappingURL=ping.test.js.map

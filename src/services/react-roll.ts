@@ -19,7 +19,6 @@ export class ReactRoll {
             if (users.bot) return;
             reaction.message.channel.send(`${users}`);
         }
-
         return Promise.reject();
     }
 }

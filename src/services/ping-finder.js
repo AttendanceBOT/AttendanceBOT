@@ -10,9 +10,9 @@ exports.PingFinder = void 0;
 const inversify_1 = require("inversify");
 let PingFinder = class PingFinder {
     constructor() {
-        this.regexp = 'tiz';
+        this.regexp = '!Start';
     }
-    isPing(stringToSearch) {
+    isTriggerCommand(stringToSearch) {
         return stringToSearch.search(this.regexp) >= 0;
     }
 };
