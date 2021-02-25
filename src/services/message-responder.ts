@@ -1,4 +1,4 @@
-import {Message} from "discord.js";
+import {Message, MessageReaction} from "discord.js";
 import {PingFinder} from "./ping-finder";
 import {inject, injectable} from "inversify";
 import {TYPES} from "../../types";
@@ -14,8 +14,20 @@ export class MessageResponder {
     }
 
     handle(message: Message): Promise<Message | Message[]> {
-        if (this.pingFinder.isPing(message.content)) {
-            return message.channel.send('pong!');
+
+        if (this.pingFinder.isPing(message.content) && message.member.roles?.cache.find(r => r.name === "Professeur")) {
+            message.channel.send({
+                embed: {
+                    color: 3447003,
+                    description: "Veuillez cliquer sur l'émoji"
+                }
+            }).then(
+                async sentMessage => {
+                    await sentMessage.react("✅")
+                }
+            );
+
+
         }
 
         return Promise.reject();

@@ -53,3 +53,4 @@ describe('MessageResponder', () => {
         when(mockedPingFinderClass.isPing("Non-empty string")).thenReturn(result);
     }
 });
+
