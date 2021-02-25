@@ -12,25 +12,28 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MessageResponder = void 0;
+exports.ReactRoll = void 0;
 const ping_finder_1 = require("./ping-finder");
 const inversify_1 = require("inversify");
 const types_1 = require("../../types");
-let MessageResponder = class MessageResponder {
+let ReactRoll = class ReactRoll {
     constructor(pingFinder) {
         this.pingFinder = pingFinder;
     }
-    handle(message) {
-        if (this.pingFinder.isPing(message.content)) {
-            return message.channel.send('pong!');
+    handle(reaction) {
+        const users = reaction.users.cache.last();
+        if (reaction.emoji.name === "✅") {
+            if (users.bot)
+                return;
+            reaction.message.channel.send(`${users}`);
         }
         return Promise.reject();
     }
 };
-MessageResponder = __decorate([
+ReactRoll = __decorate([
     inversify_1.injectable(),
     __param(0, inversify_1.inject(types_1.TYPES.PingFinder)),
     __metadata("design:paramtypes", [ping_finder_1.PingFinder])
-], MessageResponder);
-exports.MessageResponder = MessageResponder;
-//# sourceMappingURL=message-responder.js.map
+], ReactRoll);
+exports.ReactRoll = ReactRoll;
+//# sourceMappingURL=react-roll.js.map

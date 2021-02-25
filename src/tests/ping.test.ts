@@ -2,7 +2,7 @@ import "reflect-metadata";
 import 'mocha';
 import {expect} from 'chai';
 import {PingFinder} from "../../src/services/ping-finder"
-import {MessageResponder} from "../../src/services/message-responder";
+import {EmbedRoll} from "../services/embed-roll";
 import {instance, mock, verify, when} from "ts-mockito";
 import {Message} from "discord.js";
 
@@ -12,7 +12,7 @@ describe('MessageResponder', () => {
     let mockedMessageClass: Message;
     let mockedMessageInstance: Message;
 
-    let service: MessageResponder;
+    let service: EmbedRoll;
 
     beforeEach(() => {
         mockedPingFinderClass = mock(PingFinder);
@@ -21,7 +21,7 @@ describe('MessageResponder', () => {
         mockedMessageInstance = instance(mockedMessageClass);
         setMessageContents();
 
-        service = new MessageResponder(mockedPingFinderInstance);
+        service = new EmbedRoll(mockedPingFinderInstance);
     })
 
     it('should reply', async () => {
@@ -50,6 +50,7 @@ describe('MessageResponder', () => {
     }
 
     function whenIsPingThenReturn(result: boolean) {
-        when(mockedPingFinderClass.isPing("Non-empty string")).thenReturn(result);
+        when(mockedPingFinderClass.isTriggerCommand("Non-empty string")).thenReturn(result);
     }
 });
+

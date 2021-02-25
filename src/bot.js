@@ -16,12 +16,14 @@ exports.Bot = void 0;
 const discord_js_1 = require("discord.js");
 const inversify_1 = require("inversify");
 const types_1 = require("../types");
-const message_responder_1 = require("./services/message-responder");
+const embed_roll_1 = require("./services/embed-roll");
+const react_roll_1 = require("./services/react-roll");
 let Bot = class Bot {
-    constructor(client, token, messageResponder) {
+    constructor(client, token, embedRoll, reactRoll) {
         this.client = client;
         this.token = token;
-        this.messageResponder = messageResponder;
+        this.embedRoll = embedRoll;
+        this.reactRoll = reactRoll;
     }
     listen() {
         this.client.on('message', (message) => {
@@ -30,10 +32,17 @@ let Bot = class Bot {
                 return;
             }
             console.log("Message received! Contents: ", message.content);
-            this.messageResponder.handle(message).then(() => {
+            this.embedRoll.handle(message).then(() => {
                 console.log("Response sent!");
             }).catch(() => {
                 console.log("Response not sent.");
+            });
+        });
+        this.client.on('messageReactionAdd', (reaction) => {
+            this.reactRoll.handle(reaction).then(() => {
+                console.log("React not sent");
+            }).catch(() => {
+                console.log("React sent.");
             });
         });
         return this.client.login(this.token);
@@ -43,8 +52,10 @@ Bot = __decorate([
     inversify_1.injectable(),
     __param(0, inversify_1.inject(types_1.TYPES.Client)),
     __param(1, inversify_1.inject(types_1.TYPES.Token)),
-    __param(2, inversify_1.inject(types_1.TYPES.MessageResponder)),
-    __metadata("design:paramtypes", [discord_js_1.Client, String, message_responder_1.MessageResponder])
+    __param(2, inversify_1.inject(types_1.TYPES.EmbedRoll)),
+    __param(3, inversify_1.inject(types_1.TYPES.ReactRoll)),
+    __metadata("design:paramtypes", [discord_js_1.Client, String, embed_roll_1.EmbedRoll,
+        react_roll_1.ReactRoll])
 ], Bot);
 exports.Bot = Bot;
 //# sourceMappingURL=bot.js.map

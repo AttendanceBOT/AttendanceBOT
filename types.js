@@ -5,7 +5,8 @@ exports.TYPES = {
     Bot: Symbol("Bot"),
     Client: Symbol("Client"),
     Token: Symbol("Token"),
-    MessageResponder: Symbol("MessageResponder"),
+    EmbedRoll: Symbol("EmbedRoll"),
     PingFinder: Symbol("PingFinder"),
+    ReactRoll: Symbol("ReactRool"),
 };
 //# sourceMappingURL=types.js.map

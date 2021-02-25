@@ -3,9 +3,9 @@ import {injectable} from "inversify";
 @injectable()
 export class PingFinder {
 
-    private regexp = 'ping';
+    private regexp = '!Start';
 
-    public isPing(stringToSearch: string): boolean {
+    public isTriggerCommand(stringToSearch: string): boolean {
         return stringToSearch.search(this.regexp) >= 0;
     }
 }
