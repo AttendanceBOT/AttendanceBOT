@@ -11,20 +11,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Bot = void 0;
 const discord_js_1 = require("discord.js");
 const inversify_1 = require("inversify");
 const types_1 = require("../types");
 const message_responder_1 = require("./services/message-responder");
-const call_the_roll_1 = require("./services/professor/call-the-roll");
 let Bot = class Bot {
-    constructor(client, token, messageResponder, callTheRoll) {
+    constructor(client, token, messageResponder) {
         this.client = client;
         this.token = token;
         this.messageResponder = messageResponder;
-        this.callTheRoll = callTheRoll;
     }
     listen() {
         this.client.on('message', (message) => {
@@ -47,8 +44,7 @@ Bot = __decorate([
     __param(0, inversify_1.inject(types_1.TYPES.Client)),
     __param(1, inversify_1.inject(types_1.TYPES.Token)),
     __param(2, inversify_1.inject(types_1.TYPES.MessageResponder)),
-    __param(3, inversify_1.inject(types_1.TYPES.CallTheRoll)),
-    __metadata("design:paramtypes", [discord_js_1.Client, String, typeof (_a = typeof message_responder_1.MessageResponder !== "undefined" && message_responder_1.MessageResponder) === "function" ? _a : Object, call_the_roll_1.CallTheRoll])
+    __metadata("design:paramtypes", [discord_js_1.Client, String, message_responder_1.MessageResponder])
 ], Bot);
 exports.Bot = Bot;
 //# sourceMappingURL=bot.js.map

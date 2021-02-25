@@ -21,45 +21,8 @@ let MessageResponder = class MessageResponder {
         this.pingFinder = pingFinder;
     }
     handle(message) {
-        var _a;
-        const embed = `
-        embed:{
-            color: 3447003,
-                author: {
-                    name: client.user?.username,
-                    icon_url: client.user?.avatarURL(),
-                }`;
-        if (this.pingFinder.isPing(message.content) && ((_a = message.member) === null || _a === void 0 ? void 0 : _a.roles.cache.find(r => r.name === `Professeur`))) {
-            return message.channel.send({
-                embed: {
-                    color: 3447003,
-                    author: {
-                        name: "test",
-                        icon_url: "test"
-                    },
-                    title: "This is an embed",
-                    url: "http://google.com",
-                    description: "This is a test embed to showcase what they look like and what they can do.",
-                    fields: [{
-                            name: "Fields",
-                            value: "They can have different fields with small headlines."
-                        },
-                        {
-                            name: "Masked links",
-                            value: "You can put [masked links](http://google.com) inside of rich embeds."
-                        },
-                        {
-                            name: "Markdown",
-                            value: "You can put all the *usual* **__Markdown__** inside of them."
-                        }
-                    ],
-                    timestamp: new Date(),
-                    footer: {
-                        icon_url: "test",
-                        text: "© Example"
-                    }
-                }
-            });
+        if (this.pingFinder.isPing(message.content)) {
+            return message.channel.send('pong!');
         }
         return Promise.reject();
     }

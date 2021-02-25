@@ -2,24 +2,20 @@ import {Client, Message} from "discord.js";
 import {inject, injectable} from "inversify";
 import {TYPES} from "../types";
 import {MessageResponder} from "./services/message-responder";
-import {CallTheRoll} from "./services/professor/call-the-roll";
 
 @injectable()
 export class Bot {
     private client: Client;
     private readonly token: string;
     private messageResponder: MessageResponder;
-    private callTheRoll: CallTheRoll;
 
     constructor(
         @inject(TYPES.Client) client: Client,
         @inject(TYPES.Token) token: string,
-        @inject(TYPES.MessageResponder) messageResponder: MessageResponder,
-        @inject(TYPES.CallTheRoll) callTheRoll: CallTheRoll) {
+        @inject(TYPES.MessageResponder) messageResponder: MessageResponder) {
         this.client = client;
         this.token = token;
         this.messageResponder = messageResponder;
-        this.callTheRoll = callTheRoll;
     }
 
     public listen(): Promise<string> {

@@ -8,14 +8,14 @@ export class MessageResponder {
     private pingFinder: PingFinder;
 
     constructor(
-        @inject(TYPES.PingFinder) pingFinder: PingFinder,
+        @inject(TYPES.PingFinder) pingFinder: PingFinder
     ) {
         this.pingFinder = pingFinder;
     }
 
     handle(message: Message): Promise<Message | Message[]> {
         if (this.pingFinder.isPing(message.content)) {
-            message.channel.send('test');
+            return message.channel.send('pong!');
         }
 
         return Promise.reject();
