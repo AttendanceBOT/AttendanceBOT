@@ -5,7 +5,6 @@ on: [push, pull_request]
 jobs:
   build-and-deploy:
 
-    runs-on: windows-latest
     runs-on: macos-latest 
 
     strategy:
