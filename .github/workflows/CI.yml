@@ -1,0 +1,23 @@
+name: Continuous Integration
+
+on: [push, pull_request]
+
+jobs:
+  build-and-deploy:
+
+    runs-on: windows-latest
+    runs-on: macos-latest 
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x, 15.x]
+
+    steps:
+      - uses: actions/checkout@Qualification
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@Qualification
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm i
+      - run: npm run watch
+      - run: npm test

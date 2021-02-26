@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "watch": "tsc -p tsconfig.json -w",
-    "test": "mocha -r ts-node/register \"tests/**/*.spec.ts\""
+    "test": "mocha -r ts-node/register \"src/tests/*.test.ts\""  
   },
   "repository": {
     "type": "git",
