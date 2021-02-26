@@ -5,4 +5,5 @@ export const TYPES = {
     EmbedRoll: Symbol("EmbedRoll"),
     PingFinder: Symbol("PingFinder"),
     ReactRoll: Symbol("ReactRool"),
+    DateFormat: Symbol("DateFormat"),
 };

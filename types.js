@@ -8,5 +8,6 @@ exports.TYPES = {
     EmbedRoll: Symbol("EmbedRoll"),
     PingFinder: Symbol("PingFinder"),
     ReactRoll: Symbol("ReactRool"),
+    DateFormat: Symbol("DateFormat"),
 };
 //# sourceMappingURL=types.js.map

@@ -6,18 +6,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PingFinder = void 0;
+exports.DateFormat = void 0;
 const inversify_1 = require("inversify");
-let PingFinder = class PingFinder {
+let DateFormat = class DateFormat {
     constructor() {
-        this.regexp = '!appel';
+        this.dateOfToday = new Date();
     }
-    isTriggerCommand(stringToSearch) {
-        return stringToSearch.search(this.regexp) >= 0;
+    dateFR() {
+        return ('0' + this.dateOfToday.getDate()).slice(-2) + '/' + ('0' + (this.dateOfToday.getMonth() + 1)).slice(-2) +
+            '/' + this.dateOfToday.getFullYear() + ' ' + this.dateOfToday.getHours() +
+            ':' + this.dateOfToday.getMinutes() + ':' + this.dateOfToday.getSeconds();
+        ;
     }
 };
-PingFinder = __decorate([
+DateFormat = __decorate([
     inversify_1.injectable()
-], PingFinder);
-exports.PingFinder = PingFinder;
-//# sourceMappingURL=ping-finder.js.map
+], DateFormat);
+exports.DateFormat = DateFormat;
+//# sourceMappingURL=date.js.map
