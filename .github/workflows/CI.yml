@@ -5,14 +5,14 @@ on: [push, pull_request]
 jobs:
   build-and-deploy:
 
-    runs-on: macos-latest 
+    runs-on: ubuntu-latest 
 
     strategy:
       matrix:
         node-version: [14.x]
 
     steps:
-      - uses: actions/checkout@orakoto/feature/add-CI
+      - uses: actions/checkout@Qualification
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
