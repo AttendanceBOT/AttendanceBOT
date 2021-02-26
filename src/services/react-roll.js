@@ -16,16 +16,18 @@ exports.ReactRoll = void 0;
 const ping_finder_1 = require("./ping-finder");
 const inversify_1 = require("inversify");
 const types_1 = require("../../types");
+const date_1 = require("../utils/date");
 let ReactRoll = class ReactRoll {
-    constructor(pingFinder) {
+    constructor(pingFinder, dateFormat) {
         this.pingFinder = pingFinder;
+        this.dateFormat = dateFormat;
     }
     handle(reaction) {
         const users = reaction.users.cache.last();
         if (reaction.emoji.name === "✅") {
             if (users.bot)
                 return;
-            reaction.message.channel.send(`${users}`);
+            reaction.message.channel.send(`${users} ${this.dateFormat.dateFR()}`);
         }
         return Promise.reject();
     }
@@ -33,7 +35,9 @@ let ReactRoll = class ReactRoll {
 ReactRoll = __decorate([
     inversify_1.injectable(),
     __param(0, inversify_1.inject(types_1.TYPES.PingFinder)),
-    __metadata("design:paramtypes", [ping_finder_1.PingFinder])
+    __param(1, inversify_1.inject(types_1.TYPES.DateFormat)),
+    __metadata("design:paramtypes", [ping_finder_1.PingFinder,
+        date_1.DateFormat])
 ], ReactRoll);
 exports.ReactRoll = ReactRoll;
 //# sourceMappingURL=react-roll.js.map
