@@ -34,24 +34,20 @@ Le rapport discord doit contenir :
 
 ### Les rôles Discord
 
-* Les rôles Discord des étudiants doivent être explicites en fonction des groupes et déjà assignés à chaque étudiant.
+* Les rôles Discord des **étudiants** doivent être explicites en fonction des groupes et déjà assignés à chaque étudiant.  
+    Exemple : le rôle _"Groupe 201"_ est assigné à l'étudiant _"Jean-Marie"_.
 
-Exemple : le rôle _"Groupe 201"_ est assigné à l'étudiant _"Jean-Marie"_.
+* Le rôle Discord des **professeurs** doit être assigné.  
+    Exemple : le rôle _"Professeur"_ est assigné au professeur _"M. DUPONT"_.
 
-* Le rôle Discord des professeurs doit être assigné.
-
-Exemple : le rôle _"Professeur"_ est assigné au professeur _"M. DUPONT"_.
-
-* Le rôle Discord des membres du secrétariat doit être assigné.
-
-Exemple : le rôle _"Secrétariat"_ est assigné au membre du secrétariat _"Mme. VERONIQUE"_.
+* Le rôle Discord des **membres du secrétariat** doit être assigné.  
+    Exemple : le rôle _"Secrétariat"_ est assigné au membre du secrétariat _"Mme. VERONIQUE"_.
 
 
 ### Les channels
 
-* Les channels doivent être organisés en module avec des titres explicites.
-
-Exemple : le(s) channel(s) textuel(s) et vocal(aux) d'un module sont dans un groupe nommé _"GÉNIE LOGICIEL 2 (V. BOUTOUR)"_.
+* Les channels doivent être organisés en module avec des titres explicites.  
+    Exemple : le(s) channel(s) textuel(s) et vocal(aux) d'un module sont dans un groupe nommé _"GÉNIE LOGICIEL 2 (V. BOUTOUR)"_.
 
 
 
