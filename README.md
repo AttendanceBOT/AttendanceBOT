@@ -18,6 +18,7 @@ L'ensemble de la documentation
 * Cahier des charges du client (secrétariat) et du responsable (M. BOUTOUR)
 * Scénario global sur la liste des fonctionnalités
 * Documentation pour installer le projet
+
 se trouve dans notre [branche "markdown" du GitHub](https://github.com/AttendanceBOT/AttendanceBOT/tree/markdown).
 
 ## Communication au sein de notre équipe
