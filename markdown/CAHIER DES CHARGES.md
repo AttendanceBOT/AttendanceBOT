@@ -69,4 +69,4 @@ Le rapport discord doit contenir :
 ### Fonctionnalités supplémentaires éventuelles
 - Réalisation d'un message qui se déclenche à une **heure précise** (par exemple 9h) ou sur **demande par un professeur** (via une commande) chaque jour qui indique la fête du jour. Le mode de déclenchement est au choix.
 
-Exemple : _Aujourd'hui on est le 01 janvier 2021 et c'est la fête du Saint Nicolas_"_.
+Exemple : _"Aujourd'hui on est le 01 janvier 2021 et c'est la fête du Saint Nicolas"_.
