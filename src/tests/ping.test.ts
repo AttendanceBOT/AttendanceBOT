@@ -6,7 +6,7 @@ import {EmbedRoll} from "../services/embed-roll";
 import {instance, mock, verify, when} from "ts-mockito";
 import {Message} from "discord.js";
 
-describe('MessageResponder', () => {
+describe('EmbedRoll', () => {
     let mockedPingFinderClass: PingFinder;
     let mockedPingFinderInstance: PingFinder;
     let mockedMessageClass: Message;
@@ -22,14 +22,6 @@ describe('MessageResponder', () => {
         setMessageContents();
 
         service = new EmbedRoll(mockedPingFinderInstance);
-    })
-
-    it('should reply', async () => {
-        whenIsPingThenReturn(true);
-
-        await service.handle(mockedMessageInstance);
-
-        verify(mockedMessageClass.reply('pong!')).once();
     })
 
     it('should not reply', async () => {

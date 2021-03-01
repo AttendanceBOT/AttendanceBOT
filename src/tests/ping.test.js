@@ -16,7 +16,7 @@ const ping_finder_1 = require("../../src/services/ping-finder");
 const embed_roll_1 = require("../services/embed-roll");
 const ts_mockito_1 = require("ts-mockito");
 const discord_js_1 = require("discord.js");
-describe('MessageResponder', () => {
+describe('EmbedRoll', () => {
     let mockedPingFinderClass;
     let mockedPingFinderInstance;
     let mockedMessageClass;
@@ -30,11 +30,15 @@ describe('MessageResponder', () => {
         setMessageContents();
         service = new embed_roll_1.EmbedRoll(mockedPingFinderInstance);
     });
-    it('should reply', () => __awaiter(void 0, void 0, void 0, function* () {
+    /*
+    it('should reply', async () => {
         whenIsPingThenReturn(true);
-        yield service.handle(mockedMessageInstance);
-        ts_mockito_1.verify(mockedMessageClass.reply('pong!')).once();
-    }));
+
+        await service.handle(mockedMessageInstance);
+
+        verify(mockedMessageClass.reply('pong!')).once();
+    })
+    */
     it('should not reply', () => __awaiter(void 0, void 0, void 0, function* () {
         whenIsPingThenReturn(false);
         yield service.handle(mockedMessageInstance).then(() => {
