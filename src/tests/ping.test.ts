@@ -24,16 +24,6 @@ describe('EmbedRoll', () => {
         service = new EmbedRoll(mockedPingFinderInstance);
     })
 
-    /*
-    it('should reply', async () => {
-        whenIsPingThenReturn(true);
-
-        await service.handle(mockedMessageInstance);
-
-        verify(mockedMessageClass.reply('pong!')).once();
-    })
-    */
-
     it('should not reply', async () => {
         whenIsPingThenReturn(false);
 
