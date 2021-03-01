@@ -13,6 +13,15 @@ Le projet a pour but de faciliter les tâches des professeurs dans leurs quotidi
 ## Avancement du projet/Gestion de projet
 Utilisation du [Kanban de Github](https://github.com/orgs/AttendanceBOT/projects/1) se trouvant dans notre projet d'organisation.
 
+## Documentation
+L'ensemble de la documentation 
+* Cahier des charges du client (secrétariat) et du responsable (M. BOUTOUR)
+* User Story - Scénario global sur la liste des fonctionnalités
+* Documentation pour installer le projet
+* Le rapport final du projet rédigé en PDF.
+
+se trouve dans le dossier "markdown" de notre branche.
+
 ## Communication au sein de notre équipe
 Utilisation du [serveur Discord AttendanceBot](https://discord.gg/HCxycaEvUv).
 _Note : ce lien permet de rejoindre notre serveur._
