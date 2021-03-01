@@ -38,13 +38,13 @@ let Bot = class Bot {
                 console.log("Response not sent.");
             });
         });
-        this.client.on('messageReactionAdd', (reaction) => {
-            this.reactRoll.handle(reaction).then(() => {
-                console.log("React not sent");
-            }).catch(() => {
-                console.log("React sent.");
-            });
-        });
+        /*  this.client.on('messageReactionAdd', (reaction) => {
+              this.reactRoll.handle(reaction).then(() => {
+                  console.log("React not sent");
+              }).catch(() => {
+                  console.log("React sent.")
+              })
+          }); */
         return this.client.login(this.token);
     }
 };

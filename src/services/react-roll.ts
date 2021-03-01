@@ -1,5 +1,5 @@
 import {MessageReaction} from "discord.js";
-import {PingFinder} from "./ping-finder";
+import {PingFinder} from "../commands/ping-finder";
 import {inject, injectable} from "inversify";
 import {TYPES} from "../../types";
 import {DateFormat} from "../utils/date";

@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import 'mocha';
 import {expect} from 'chai';
-import {PingFinder} from "../../src/services/ping-finder"
+import {PingFinder} from "../commands/ping-finder"
 import {EmbedRoll} from "../services/embed-roll";
 import {instance, mock, verify, when} from "ts-mockito";
 import {Message} from "discord.js";
