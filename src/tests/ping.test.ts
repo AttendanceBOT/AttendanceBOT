@@ -5,23 +5,28 @@ import {PingFinder} from "../../src/commands/ping-finder"
 import {EmbedRoll} from "../services/embed-roll";
 import {instance, mock, verify, when} from "ts-mockito";
 import {Message} from "discord.js";
+import {DateFormat} from "../utils/date";
 
 describe('EmbedRoll', () => {
     let mockedPingFinderClass: PingFinder;
     let mockedPingFinderInstance: PingFinder;
     let mockedMessageClass: Message;
     let mockedMessageInstance: Message;
+    let mockedDateFNSClass: DateFormat;
+    let mockedDateFNSInstance: DateFormat;
 
     let service: EmbedRoll;
 
     beforeEach(() => {
         mockedPingFinderClass = mock(PingFinder);
         mockedPingFinderInstance = instance(mockedPingFinderClass);
+        mockedDateFNSClass = mock(DateFormat);
+        mockedDateFNSInstance = instance(mockedDateFNSClass);
         mockedMessageClass = mock(Message);
         mockedMessageInstance = instance(mockedMessageClass);
         setMessageContents();
 
-        service = new EmbedRoll(mockedPingFinderInstance);
+        service = new EmbedRoll(mockedPingFinderInstance, mockedDateFNSInstance);
     })
 
     it('should not reply', async () => {
