@@ -4,7 +4,6 @@ import {TYPES} from "../types";
 import {EmbedRoll} from "./services/embed-roll";
 import {ReactRoll} from "./services/react-roll";
 
-
 @injectable()
 export class Bot {
     private client: Client;
@@ -38,14 +37,6 @@ export class Bot {
                 console.log("Response not sent.")
             })
         });
-
-        /*  this.client.on('messageReactionAdd', (reaction) => {
-              this.reactRoll.handle(reaction).then(() => {
-                  console.log("React not sent");
-              }).catch(() => {
-                  console.log("React sent.")
-              })
-          }); */
 
         return this.client.login(this.token);
     }
