@@ -1,4 +1,4 @@
-import {Client, Guild, Message} from "discord.js";
+import {Client, Message} from "discord.js";
 import {inject, injectable} from "inversify";
 import {TYPES} from "../types";
 import {EmbedRoll} from "./services/embed-roll";
@@ -15,7 +15,7 @@ export class Bot {
         @inject(TYPES.Client) client: Client,
         @inject(TYPES.Token) token: string,
         @inject(TYPES.EmbedRoll) embedRoll: EmbedRoll,
-        @inject(TYPES.ReactRoll) reactRoll: ReactRoll) {
+        @inject(TYPES.ReactRoll) reactRoll: ReactRoll){
         this.client = client;
         this.token = token;
         this.embedRoll = embedRoll;
@@ -35,14 +35,6 @@ export class Bot {
                 console.log("Response sent!");
             }).catch(() => {
                 console.log("Response not sent.")
-            })
-        });
-
-        this.client.on('messageReactionAdd', (reaction) => {
-            this.reactRoll.handle(reaction).then(() => {
-                console.log("React not sent");
-            }).catch(() => {
-                console.log("React sent.")
             })
         });
 

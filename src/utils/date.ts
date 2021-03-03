@@ -1,15 +1,11 @@
 import {injectable} from "inversify";
+import {format} from 'date-fns'
+import {fr} from 'date-fns/locale'
 
 @injectable()
 export class DateFormat {
 
-    private dateOfToday = new Date();
-
     public dateFR() {
-        return ('0'+this.dateOfToday.getDate()).slice(-2) + '/' + ('0'+(this.dateOfToday.getMonth() + 1)).slice(-2) +
-            '/' + this.dateOfToday.getFullYear() + ' ' + this.dateOfToday.getHours() +
-            ':' + this.dateOfToday.getMinutes() + ':' + this.dateOfToday.getSeconds();
-        ;
+        return format(new Date(), 'dd/MM/yyyy HH:mm:ss', {locale: fr});
     }
 }
-
