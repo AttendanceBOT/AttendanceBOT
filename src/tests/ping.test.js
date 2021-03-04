@@ -12,33 +12,29 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 require("mocha");
 const chai_1 = require("chai");
-const ping_finder_1 = require("../commands/ping-finder");
+const ping_finder_1 = require("../../src/commands/ping-finder");
 const embed_roll_1 = require("../services/embed-roll");
 const ts_mockito_1 = require("ts-mockito");
 const discord_js_1 = require("discord.js");
+const date_1 = require("../utils/date");
 describe('EmbedRoll', () => {
     let mockedPingFinderClass;
     let mockedPingFinderInstance;
     let mockedMessageClass;
     let mockedMessageInstance;
+    let mockedDateFNSClass;
+    let mockedDateFNSInstance;
     let service;
     beforeEach(() => {
         mockedPingFinderClass = ts_mockito_1.mock(ping_finder_1.PingFinder);
         mockedPingFinderInstance = ts_mockito_1.instance(mockedPingFinderClass);
+        mockedDateFNSClass = ts_mockito_1.mock(date_1.DateFormat);
+        mockedDateFNSInstance = ts_mockito_1.instance(mockedDateFNSClass);
         mockedMessageClass = ts_mockito_1.mock(discord_js_1.Message);
         mockedMessageInstance = ts_mockito_1.instance(mockedMessageClass);
         setMessageContents();
-        service = new embed_roll_1.EmbedRoll(mockedPingFinderInstance);
+        service = new embed_roll_1.EmbedRoll(mockedPingFinderInstance, mockedDateFNSInstance);
     });
-    /*
-    it('should reply', async () => {
-        whenIsPingThenReturn(true);
-
-        await service.handle(mockedMessageInstance);
-
-        verify(mockedMessageClass.reply('pong!')).once();
-    })
-    */
     it('should not reply', () => __awaiter(void 0, void 0, void 0, function* () {
         whenIsPingThenReturn(false);
         yield service.handle(mockedMessageInstance).then(() => {

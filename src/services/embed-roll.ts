@@ -8,6 +8,7 @@ import {DateFormat} from "../utils/date";
 export class EmbedRoll {
     private pingFinder: PingFinder;
     private dateFormat: DateFormat;
+    private nomRoleDedie: string;
 
     constructor(
         @inject(TYPES.PingFinder) pingFinder: PingFinder,
@@ -19,7 +20,8 @@ export class EmbedRoll {
 
     handle(message: Message): Promise<Message | Message[]> {
         let studentsRoll = [];
-        const filter = reaction => reaction.emoji.name === '✅';
+        let nomRoleDedie = this.pingFinder.getRolePermission();
+        const filter = reaction => reaction.emoji.name === '✅' && message.member.roles.cache.has(nomRoleDedie);
         if (this.pingFinder.isTriggerCommand(message.content) && message.member.roles?.cache.find(r => r.name === "Professeur")) {
             message.channel.send({
                 embed: {
@@ -29,7 +31,7 @@ export class EmbedRoll {
             }).then(
                 async sentMessage => {
                     await sentMessage.react("✅")
-                        .then(() => {
+                        .then(() => {                            
                             sentMessage.awaitReactions(filter, {time: 5000})
                                 .then(collected => message.channel
                                     .send(`${collected

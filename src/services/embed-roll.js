@@ -34,7 +34,8 @@ let EmbedRoll = class EmbedRoll {
     handle(message) {
         var _a;
         let studentsRoll = [];
-        const filter = reaction => reaction.emoji.name === '✅';
+        let nomRoleDedie = this.pingFinder.getRolePermission();
+        const filter = reaction => reaction.emoji.name === '✅' && message.member.roles.cache.has(nomRoleDedie);
         if (this.pingFinder.isTriggerCommand(message.content) && ((_a = message.member.roles) === null || _a === void 0 ? void 0 : _a.cache.find(r => r.name === "Professeur"))) {
             message.channel.send({
                 embed: {
