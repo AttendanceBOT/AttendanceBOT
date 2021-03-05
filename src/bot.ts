@@ -1,4 +1,5 @@
-import {Client, TextChannel, Message} from "discord.js";
+
+import {Client, Message} from "discord.js";
 import {inject, injectable} from "inversify";
 import {TYPES} from "../types";
 import {EmbedRoll} from "./services/embed-roll";
@@ -23,6 +24,8 @@ export class Bot {
         @inject(TYPES.CronSaintMessage) cronSaintMessage: CronSaintMessage,
         @inject(TYPES.SaintMessage) saintMessage: SaintMessage,
     ) {
+
+        @inject(TYPES.ReactRoll) reactRoll: ReactRoll){
         this.client = client;
         this.token = token;
         this.embedRoll = embedRoll;
@@ -67,6 +70,7 @@ export class Bot {
                 console.log("Message sent automaticaly.")
             })
         })
+
         return this.client.login(this.token);
     }
 }

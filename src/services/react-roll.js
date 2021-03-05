@@ -13,7 +13,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ReactRoll = void 0;
-const ping_finder_1 = require("./ping-finder");
+const ping_finder_1 = require("../commands/ping-finder");
 const inversify_1 = require("inversify");
 const types_1 = require("../../types");
 const date_1 = require("../utils/date");

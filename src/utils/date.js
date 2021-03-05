@@ -8,15 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DateFormat = void 0;
 const inversify_1 = require("inversify");
+const date_fns_1 = require("date-fns");
+const locale_1 = require("date-fns/locale");
 let DateFormat = class DateFormat {
-    constructor() {
-        this.dateOfToday = new Date();
-    }
     dateFR() {
-        return ('0' + this.dateOfToday.getDate()).slice(-2) + '/' + ('0' + (this.dateOfToday.getMonth() + 1)).slice(-2) +
-            '/' + this.dateOfToday.getFullYear() + ' ' + this.dateOfToday.getHours() +
-            ':' + this.dateOfToday.getMinutes() + ':' + this.dateOfToday.getSeconds();
-        ;
+        return date_fns_1.format(new Date(), 'dd/MM/yyyy HH:mm:ss', { locale: locale_1.fr });
     }
 };
 DateFormat = __decorate([

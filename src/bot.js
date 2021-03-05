@@ -42,6 +42,7 @@ let Bot = class Bot {
                 console.log("Response not sent.");
             });
         });
+
         this.client.on('messageReactionAdd', (reaction) => {
             this.reactRoll.handle(reaction).then(() => {
             });
@@ -60,6 +61,7 @@ let Bot = class Bot {
                 console.log("Message sent automaticaly.");
             });
         });
+      
         return this.client.login(this.token);
     }
 };

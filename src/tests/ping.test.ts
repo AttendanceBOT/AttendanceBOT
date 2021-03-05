@@ -1,35 +1,32 @@
 import "reflect-metadata";
 import 'mocha';
 import {expect} from 'chai';
-import {PingFinder} from "../../src/services/ping-finder"
+import {PingFinder} from "../../src/commands/ping-finder"
 import {EmbedRoll} from "../services/embed-roll";
 import {instance, mock, verify, when} from "ts-mockito";
 import {Message} from "discord.js";
+import {DateFormat} from "../utils/date";
 
-describe('MessageResponder', () => {
+describe('EmbedRoll', () => {
     let mockedPingFinderClass: PingFinder;
     let mockedPingFinderInstance: PingFinder;
     let mockedMessageClass: Message;
     let mockedMessageInstance: Message;
+    let mockedDateFNSClass: DateFormat;
+    let mockedDateFNSInstance: DateFormat;
 
     let service: EmbedRoll;
 
     beforeEach(() => {
         mockedPingFinderClass = mock(PingFinder);
         mockedPingFinderInstance = instance(mockedPingFinderClass);
+        mockedDateFNSClass = mock(DateFormat);
+        mockedDateFNSInstance = instance(mockedDateFNSClass);
         mockedMessageClass = mock(Message);
         mockedMessageInstance = instance(mockedMessageClass);
         setMessageContents();
 
-        service = new EmbedRoll(mockedPingFinderInstance);
-    })
-
-    it('should reply', async () => {
-        whenIsPingThenReturn(true);
-
-        await service.handle(mockedMessageInstance);
-
-        verify(mockedMessageClass.reply('pong!')).once();
+        service = new EmbedRoll(mockedPingFinderInstance, mockedDateFNSInstance);
     })
 
     it('should not reply', async () => {
@@ -53,4 +50,3 @@ describe('MessageResponder', () => {
         when(mockedPingFinderClass.isTriggerCommand("Non-empty string")).thenReturn(result);
     }
 });
-

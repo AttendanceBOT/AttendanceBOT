@@ -22,15 +22,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmbedRoll = void 0;
-const ping_finder_1 = require("./ping-finder");
+const ping_finder_1 = require("../commands/ping-finder");
 const inversify_1 = require("inversify");
 const types_1 = require("../../types");
+const date_1 = require("../utils/date");
 let EmbedRoll = class EmbedRoll {
-    constructor(pingFinder) {
+    constructor(pingFinder, dateFR) {
         this.pingFinder = pingFinder;
+        this.dateFormat = dateFR;
     }
     handle(message) {
         var _a;
+        let studentsRoll = [];
+        const filter = reaction => reaction.emoji.name === '✅';
         if (this.pingFinder.isTriggerCommand(message.content) && ((_a = message.member.roles) === null || _a === void 0 ? void 0 : _a.cache.find(r => r.name === "Professeur"))) {
             message.channel.send({
                 embed: {
@@ -38,7 +42,14 @@ let EmbedRoll = class EmbedRoll {
                     description: "Veuillez cliquer sur l'émoji"
                 }
             }).then((sentMessage) => __awaiter(this, void 0, void 0, function* () {
-                yield sentMessage.react("✅");
+                yield sentMessage.react("✅")
+                    .then(() => {
+                    sentMessage.awaitReactions(filter, { time: 5000 })
+                        .then(collected => message.channel
+                        .send(`${collected
+                        .map(usersReaction => studentsRoll = usersReaction.users.cache.array().slice(1))}`));
+                    message.channel.send(studentsRoll);
+                });
             }));
         }
         return Promise.reject();
@@ -47,7 +58,9 @@ let EmbedRoll = class EmbedRoll {
 EmbedRoll = __decorate([
     inversify_1.injectable(),
     __param(0, inversify_1.inject(types_1.TYPES.PingFinder)),
-    __metadata("design:paramtypes", [ping_finder_1.PingFinder])
+    __param(1, inversify_1.inject(types_1.TYPES.DateFormat)),
+    __metadata("design:paramtypes", [ping_finder_1.PingFinder,
+        date_1.DateFormat])
 ], EmbedRoll);
 exports.EmbedRoll = EmbedRoll;
 //# sourceMappingURL=embed-roll.js.map

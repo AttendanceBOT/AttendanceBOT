@@ -5,8 +5,8 @@
 ## Action 1 : En tant que professeur, je peux lancer un appel
 
 * Le professeur écrit dans le channel :
-    * **!appel @Groupe 2xx (avec numéro du groupe) / jusqu'à 4 groupes possibles**.
-* Le bot envoie un message dans le channel où l’appel a lieu et affiche l'emoji **:white_check_mark:** pendant 2 minutes.
+    * **!appel @Groupe 2xx (il s'agit du numéro du groupe = nom du rôle) / jusqu'à 4 groupes possibles**.
+* Le bot envoie un message dans un channel dédié où l’appel a lieu et affiche l'emoji **:white_check_mark:** pendant 2 minutes.
 
 
 ## Action 2 : En tant qu’étudiant, je peux manifester ma présence en répondant à l’appel
@@ -19,7 +19,7 @@
 * Je termine l’appel en envoyant un message 2 minutes après le début de l’appel.
 * La liste des étudiants présents (et uniquement les étudiants du même groupe que le professeur a demandé) est affichée avec mention des étudiants (@xxx) et de son groupe.
 
-* ## Optionnel : Flexibilité du professeur 
+* ## Optionnel : Flexibilité du professeur
 
     * ### Action 4 : En tant que professeur, quand un appel est en cours, je peux annuler l’appel
 
@@ -62,16 +62,15 @@
 * Le bot affiche la liste des présences du dernier appel avec @xxx.
 
 
-## Action 8 : En tant que professeur, quand l’appel est terminé, je peux générer la feuille de présence avec le rapport
+## Action 8 : En tant que professeur, quand l’appel est terminé, je peux générer la feuille de présence
 
 * Le professeur écrit dans le channel :
-    * **!feuille**
-* Le bot demande confirmation “êtes-vous sûr de vouloir générer la feuille d’émargement et le rapport ?”.
+    * **!feuille @Groupe 2xx**
+* Le bot demande confirmation “êtes-vous sûr de vouloir générer la feuille d’émargement du groupe en question ?”.
 * Le professeur écrit :
     * o : pour oui
     * n : pour non
-* Le bot confirme la génération du document (à télécharger via un lien sur le même channel ou envoyé en message privé directement au professeur).
-* _Note: à faire en fin de cours afin de générer le rapport_.
+* Le bot confirme la génération du document (envoyé en message privé directement au professeur).
 
 
 ## Action 9 : En tant que bot, quand un professeur ou un administrateur me le demande, je peux afficher la liste des commandes du serveur

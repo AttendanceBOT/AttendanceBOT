@@ -3,7 +3,7 @@ import {Container} from "inversify";
 import {TYPES} from "./types";
 import {Bot} from "./src/bot";
 import {Client} from "discord.js";
-import {PingFinder} from "./src/services/ping-finder";
+import {PingFinder} from "./src/commands/ping-finder";
 import {EmbedRoll} from "./src/services/embed-roll";
 import {ReactRoll} from "./src/services/react-roll";
 import {DateFormat} from "./src/utils/date";
