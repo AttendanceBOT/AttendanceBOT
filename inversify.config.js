@@ -9,8 +9,6 @@ const ping_finder_1 = require("./src/commands/ping-finder");
 const embed_roll_1 = require("./src/services/embed-roll");
 const react_roll_1 = require("./src/services/react-roll");
 const date_1 = require("./src/utils/date");
-const help_1 = require("./src/commands/help");
-const help_res_1 = require("./src/commands/help-res");
 const bot_presence_1 = require("./src/services/bot-presence");
 let container = new inversify_1.Container();
 container.bind(types_1.TYPES.Bot).to(bot_1.Bot).inSingletonScope();
@@ -20,8 +18,6 @@ container.bind(types_1.TYPES.EmbedRoll).to(embed_roll_1.EmbedRoll).inSingletonSc
 container.bind(types_1.TYPES.PingFinder).to(ping_finder_1.PingFinder).inSingletonScope();
 container.bind(types_1.TYPES.ReactRoll).to(react_roll_1.ReactRoll).inSingletonScope();
 container.bind(types_1.TYPES.DateFormat).to(date_1.DateFormat).inSingletonScope();
-container.bind(types_1.TYPES.Help).to(help_1.Help).inSingletonScope();
-container.bind(types_1.TYPES.HelpRes).to(help_res_1.HelpRes).inSingletonScope();
 container.bind(types_1.TYPES.ActivityGame).to(bot_presence_1.BotPresence).inSingletonScope();
 exports.default = container;
 //# sourceMappingURL=inversify.config.js.map
