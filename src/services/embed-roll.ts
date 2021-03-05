@@ -18,20 +18,19 @@ export class EmbedRoll {
     }
 
     handle(message: Message): Promise<Message | Message[]> {
-
-        let userTestStatus = new Array();
-        console.log(this.pingFinder.getRolePermission().length)
-
-        for (var i = 0; i < this.pingFinder.getRolePermission().length; i++) {
-
-            userTestStatus.push({id: this.pingFinder.getRolePermission()[i], allow: ['ADD_REACTIONS', 'VIEW_CHANNEL']});
-        }
-
-        userTestStatus.push({id: "787995922830983169", deny: ['VIEW_CHANNEL']});
-
-        let studentsRoll = new Collection();
         const filter = reaction => reaction.emoji.name === '✅';
         if (this.pingFinder.isTriggerCommand(message.content) && message.member.roles?.cache.find(r => r.name === "Professeur")) {
+            let userTestStatus = new Array();
+
+            for (var i = 0; i < this.pingFinder.getRolePermission().length; i++) {
+                userTestStatus.push({
+                    id: this.pingFinder.getRolePermission()[i],
+                    allow: ['ADD_REACTIONS', 'VIEW_CHANNEL']
+                });
+            }
+
+            userTestStatus.push({id: "787995922830983169", deny: ['VIEW_CHANNEL']});
+
             message.guild.channels.create('appel ' + this.pingFinder.getRolePermission(), {
                 type: 'text',
                 permissionOverwrites: [...userTestStatus]

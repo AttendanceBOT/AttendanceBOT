@@ -22,7 +22,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmbedRoll = void 0;
-const discord_js_1 = require("discord.js");
 const ping_finder_1 = require("../commands/ping-finder");
 const inversify_1 = require("inversify");
 const types_1 = require("../../types");
@@ -34,15 +33,16 @@ let EmbedRoll = class EmbedRoll {
     }
     handle(message) {
         var _a;
-        let userTestStatus = new Array();
-        console.log(this.pingFinder.getRolePermission().length);
-        for (var i = 0; i < this.pingFinder.getRolePermission().length; i++) {
-            userTestStatus.push({ id: this.pingFinder.getRolePermission()[i], allow: ['ADD_REACTIONS', 'VIEW_CHANNEL'] });
-        }
-        userTestStatus.push({ id: "787995922830983169", deny: ['VIEW_CHANNEL'] });
-        let studentsRoll = new discord_js_1.Collection();
         const filter = reaction => reaction.emoji.name === '✅';
         if (this.pingFinder.isTriggerCommand(message.content) && ((_a = message.member.roles) === null || _a === void 0 ? void 0 : _a.cache.find(r => r.name === "Professeur"))) {
+            let userTestStatus = new Array();
+            for (var i = 0; i < this.pingFinder.getRolePermission().length; i++) {
+                userTestStatus.push({
+                    id: this.pingFinder.getRolePermission()[i],
+                    allow: ['ADD_REACTIONS', 'VIEW_CHANNEL']
+                });
+            }
+            userTestStatus.push({ id: "787995922830983169", deny: ['VIEW_CHANNEL'] });
             message.guild.channels.create('appel ' + this.pingFinder.getRolePermission(), {
                 type: 'text',
                 permissionOverwrites: [...userTestStatus]

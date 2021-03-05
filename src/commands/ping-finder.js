@@ -17,7 +17,7 @@ const inversify_1 = require("inversify");
 const types_1 = require("../../types");
 let PingFinder = class PingFinder {
     constructor(prefix) {
-        this.regexp = 'app';
+        this.regexp = 'appel ';
         this.idRole = [];
         this.prefix = prefix;
     }
@@ -29,7 +29,7 @@ let PingFinder = class PingFinder {
             return;
         const args = message.content.slice(this.prefix.length).trim().split(/ +/);
         const command = args.shift().toLowerCase();
-        let idRole = [];
+        this.idRole = [];
         for (var i = 0; i < args.length; i++) {
             this.idRole.push(args[i].substring(3).slice(0, -1));
         }
@@ -38,9 +38,6 @@ let PingFinder = class PingFinder {
     }
     getRolePermission() {
         return this.idRole;
-    }
-    setRolePermission(nomRole) {
-        return this.nomRoleGrp = nomRole;
     }
 };
 PingFinder = __decorate([
