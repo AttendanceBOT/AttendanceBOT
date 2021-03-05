@@ -81,6 +81,7 @@ Dans votre terminal d'éditeur de code ou dans un terminal Windows, tapez :
 
 
 ## Étape 6 - Fermer le bot AttendanceBot
+
 1. Pour arrêter le serveur, appuyez sur les touches : **Ctrl** + **C** et confirmez avec "_o_".
 
 1. Enfin, fermez votre terminal avec en tapant "_exit_".

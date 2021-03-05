@@ -1,6 +1,7 @@
 import {Client, Message} from "discord.js";
 import {inject, injectable} from "inversify";
 import {TYPES} from "../types";
+import {BotPresence} from "./services/bot-presence";
 import {EmbedRoll} from "./services/embed-roll";
 import {ReactRoll} from "./services/react-roll";
 import {CronSaintMessage} from "./services/cron-message-saint";
@@ -10,6 +11,7 @@ import {SaintMessage} from "./services/message.saint";
 export class Bot {
     private client: Client;
     private readonly token: string;
+    private botPresence: BotPresence;
     private embedRoll: EmbedRoll;
     private reactRoll: ReactRoll;
     private cronSaintMessage: CronSaintMessage;
@@ -18,6 +20,7 @@ export class Bot {
     constructor(
         @inject(TYPES.Client) client: Client,
         @inject(TYPES.Token) token: string,
+        @inject(TYPES.ActivityGame) botPresence: BotPresence,
         @inject(TYPES.EmbedRoll) embedRoll: EmbedRoll,
         @inject(TYPES.ReactRoll) reactRoll: ReactRoll,
         @inject(TYPES.CronSaintMessage) cronSaintMessage: CronSaintMessage,
@@ -27,6 +30,7 @@ export class Bot {
         this.token = token;
         this.embedRoll = embedRoll;
         this.reactRoll = reactRoll;
+        this.botPresence = botPresence;
         this.cronSaintMessage = cronSaintMessage;
         this.saintMessage = saintMessage;
     }
@@ -41,6 +45,14 @@ export class Bot {
             console.log("Message received! Contents: ", message.content);
 
             this.embedRoll.handle(message).then(() => {
+                console.log("Response sent!");
+            }).catch(() => {
+                console.log("Response not sent.")
+            })
+        });
+
+        this.client.on('ready', () => {
+            this.botPresence.handle().then(() => {
                 console.log("Response sent!");
             }).catch(() => {
                 console.log("Response not sent.")

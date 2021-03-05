@@ -9,6 +9,7 @@ import {ReactRoll} from "./src/services/react-roll";
 import {DateFormat} from "./src/utils/date";
 import {CronSaintMessage} from "./src/services/cron-message-saint";
 import {SaintMessage} from "./src/services/message.saint";
+import {BotPresence} from "./src/services/bot-presence";
 
 let container = new Container();
 
@@ -23,5 +24,7 @@ container.bind<ReactRoll>(TYPES.ReactRoll).to(ReactRoll).inSingletonScope();
 container.bind<DateFormat>(TYPES.DateFormat).to(DateFormat).inSingletonScope();
 container.bind<CronSaintMessage>(TYPES.CronSaintMessage).to(CronSaintMessage).inSingletonScope();
 container.bind<SaintMessage>(TYPES.SaintMessage).to(SaintMessage).inSingletonScope();
+
+container.bind<BotPresence>(TYPES.ActivityGame).to(BotPresence).inSingletonScope();
 
 export default container;
