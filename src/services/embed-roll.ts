@@ -25,8 +25,8 @@ export class EmbedRoll {
                 type: 'text',
                 permissionOverwrites: [
                     {
-                        id: this.pingFinder.getRolePermission(),
-                        allow: ['ADD_REACTIONS']
+                        id: "816947569561305148",
+                        allow: ['ADD_REACTIONS','VIEW_CHANNEL']
                     }, {
                         id: message.guild.roles.everyone.id,
                         deny: ['VIEW_CHANNEL']
@@ -34,7 +34,7 @@ export class EmbedRoll {
                 ]
 
             }).then((channelCreate) => {
-                    channelCreate.send({
+                channelCreate.overwritePermissions('816947631279308820', { SEND_MESSAGES: true, ADD_REACTIONS: true});                    channelCreate.send({
                         embed: {
                             color: 3447003,
                             description: "Veuillez cliquer sur l'émoji"

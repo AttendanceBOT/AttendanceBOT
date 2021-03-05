@@ -1,42 +1,44 @@
-import {injectable} from "inversify";
+import {inject, injectable} from "inversify";
 import {Message} from "discord.js";
+import {TYPES} from "../../types";
 
 @injectable()
 export class PingFinder {
 
-    private regexp = '!app';
+    private regexp = 'app';
     private nomRoleGrp: string;
+    private readonly prefix: string;
+    private allRole: string[];
+    private idRole: string[] = [];
+
+    constructor(@inject(TYPES.Prefix) prefix: string) {
+        this.prefix = prefix;
+    }
 
     public isTriggerCommand(stringToSearch: string): boolean {
         return stringToSearch.search(this.regexp) >= 0;
     }
 
     handle(message: Message): Promise<Message | Message[]> {
-
-        if (!message.content.startsWith(this.regexp)) return;
-        let allRole = [];
-        const args = message.content.slice(this.regexp.length).trim().split(' ');
+        if (!message.content.startsWith(this.prefix) || message.author.bot) return;
+        const args = message.content.slice(this.prefix.length).trim().split(/ +/);
         const command = args.shift().toLowerCase();
+        let idRole = [];
 
-        message.guild.roles.cache.map(role => allRole.push(role.id));
 
-        for (var i = 0; i < allRole.length; i++) {
-            if (command.substring(3, 21).toString() === allRole[i]) {
-                let getRole = message.guild.roles.cache.find((role) => role.id === command.substring(3, 21).toString());
-                message.channel.send("Vous avez lancé l'appel pour les " + getRole.name);
-                console.log(this.setRolePermission(command.substring(3, 21).toString()) +"ping finder");
-                console.log(this.getRolePermission()+ " get ping finder")
-            }
+        for(var i =0;i<args.length;i++){
+            this.idRole.push(args[i].substring(3).slice(0,-1));
         }
+
+        message.channel.send(this.getRolePermission())
         return Promise.reject();
     }
 
-    public getRolePermission(): string {
-        return this.nomRoleGrp;
+    public getRolePermission(): string[] {
+        return this.idRole;
     }
 
     public setRolePermission(nomRole: string): string {
         return this.nomRoleGrp = nomRole;
     }
-
 }
