@@ -28,12 +28,8 @@ export class PingFinder {
                 if(tabelement[j] === allRole[i]){
                    // message.channel.send("Vous avez lancé l'appel pour " + tabelement[j]);
                     this.getRole = message.guild.roles.cache.find((role) => role.id === tabelement[j]);
-                    message.channel.send("Vous avez lancé l'appel pour les " + this.getRole.name);
-                    console.log("JAI REUSSI");
-                }
-                else{
-                    console.log("PRESQUE");
-                }
+                    message.channel.send("Vous avez lancé l'appel pour les " + this.getRole.name);                                  
+              }  
             }
         }
         //console.log("Voici les args " + args + "\n Voici les elements de l'args" + elementofargs + "\n TAB" + tabelement);
