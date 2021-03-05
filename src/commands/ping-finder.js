@@ -10,7 +10,7 @@ exports.PingFinder = void 0;
 const inversify_1 = require("inversify");
 let PingFinder = class PingFinder {
     constructor() {
-        this.regexp = '!appel';
+        this.regexp = '!app';
     }
     isTriggerCommand(stringToSearch) {
         return stringToSearch.search(this.regexp) >= 0;
@@ -26,7 +26,8 @@ let PingFinder = class PingFinder {
             if (command.substring(3, 21).toString() === allRole[i]) {
                 let getRole = message.guild.roles.cache.find((role) => role.id === command.substring(3, 21).toString());
                 message.channel.send("Vous avez lancé l'appel pour les " + getRole.name);
-                this.setRolePermission(command.substring(3, 21).toString());
+                console.log(this.setRolePermission(command.substring(3, 21).toString()) + "ping finder");
+                console.log(this.getRolePermission() + " get ping finder");
             }
         }
         return Promise.reject();

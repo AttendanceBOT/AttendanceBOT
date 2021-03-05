@@ -4,6 +4,5 @@ export const TYPES = {
     Token: Symbol("Token"),
     EmbedRoll: Symbol("EmbedRoll"),
     PingFinder: Symbol("PingFinder"),
-    ReactRoll: Symbol("ReactRool"),
     DateFormat: Symbol("DateFormat"),
 };

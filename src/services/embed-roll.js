@@ -22,6 +22,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmbedRoll = void 0;
+const discord_js_1 = require("discord.js");
 const ping_finder_1 = require("../commands/ping-finder");
 const inversify_1 = require("inversify");
 const types_1 = require("../../types");
@@ -33,25 +34,34 @@ let EmbedRoll = class EmbedRoll {
     }
     handle(message) {
         var _a;
-        let studentsRoll = [];
-        let nomRoleDedie = this.pingFinder.getRolePermission();
-        const filter = reaction => reaction.emoji.name === '✅' && message.member.roles.cache.has(nomRoleDedie);
+        let studentsRoll = new discord_js_1.Collection();
+        const filter = reaction => reaction.emoji.name === '✅';
         if (this.pingFinder.isTriggerCommand(message.content) && ((_a = message.member.roles) === null || _a === void 0 ? void 0 : _a.cache.find(r => r.name === "Professeur"))) {
-            message.channel.send({
-                embed: {
-                    color: 3447003,
-                    description: "Veuillez cliquer sur l'émoji"
-                }
-            }).then((sentMessage) => __awaiter(this, void 0, void 0, function* () {
-                yield sentMessage.react("✅")
-                    .then(() => {
-                    sentMessage.awaitReactions(filter, { time: 5000 })
-                        .then(collected => message.channel
-                        .send(`${collected
-                        .map(usersReaction => studentsRoll = usersReaction.users.cache.array().slice(1))}`));
-                    message.channel.send(studentsRoll);
-                });
-            }));
+            message.guild.channels.create('appel ' + this.pingFinder.getRolePermission(), {
+                type: 'text',
+                permissionOverwrites: [
+                    {
+                        id: this.pingFinder.getRolePermission(),
+                        allow: ['ADD_REACTIONS']
+                    }, {
+                        id: message.guild.roles.everyone.id,
+                        deny: ['VIEW_CHANNEL']
+                    }
+                ]
+            }).then((channelCreate) => {
+                channelCreate.send({
+                    embed: {
+                        color: 3447003,
+                        description: "Veuillez cliquer sur l'émoji"
+                    }
+                }).then((sentMessage) => __awaiter(this, void 0, void 0, function* () {
+                    yield sentMessage.react("✅").then(() => {
+                        sentMessage.awaitReactions(filter, { time: 5000 })
+                            .then(collected => message.author.send(collected
+                            .map(userReactions => userReactions.users.cache.map(n => n.username))));
+                    });
+                }));
+            });
         }
         return Promise.reject();
     }

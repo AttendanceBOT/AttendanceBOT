@@ -1,4 +1,4 @@
-import {Message} from "discord.js";
+import {Collection, Message} from "discord.js";
 import {PingFinder} from "../commands/ping-finder";
 import {inject, injectable} from "inversify";
 import {TYPES} from "../../types";
@@ -8,7 +8,6 @@ import {DateFormat} from "../utils/date";
 export class EmbedRoll {
     private pingFinder: PingFinder;
     private dateFormat: DateFormat;
-    private nomRoleDedie: string;
 
     constructor(
         @inject(TYPES.PingFinder) pingFinder: PingFinder,
@@ -19,24 +18,35 @@ export class EmbedRoll {
     }
 
     handle(message: Message): Promise<Message | Message[]> {
-        let studentsRoll = [];
-        let nomRoleDedie = this.pingFinder.getRolePermission();
-        const filter = reaction => reaction.emoji.name === '✅' && message.member.roles.cache.has(nomRoleDedie);
+        let studentsRoll = new Collection();
+        const filter = reaction => reaction.emoji.name === '✅';
         if (this.pingFinder.isTriggerCommand(message.content) && message.member.roles?.cache.find(r => r.name === "Professeur")) {
-            message.channel.send({
-                embed: {
-                    color: 3447003,
-                    description: "Veuillez cliquer sur l'émoji"
-                }
-            }).then(
-                async sentMessage => {
-                    await sentMessage.react("✅")
-                        .then(() => {                            
-                            sentMessage.awaitReactions(filter, {time: 5000})
-                                .then(collected => message.channel
-                                    .send(`${collected
-                                        .map(usersReaction => studentsRoll = usersReaction.users.cache.array().slice(1))}`));
-                            message.channel.send(studentsRoll);
+            message.guild.channels.create('appel ' + this.pingFinder.getRolePermission(), {
+                type: 'text',
+                permissionOverwrites: [
+                    {
+                        id: this.pingFinder.getRolePermission(),
+                        allow: ['ADD_REACTIONS']
+                    }, {
+                        id: message.guild.roles.everyone.id,
+                        deny: ['VIEW_CHANNEL']
+                    }
+                ]
+
+            }).then((channelCreate) => {
+                    channelCreate.send({
+                        embed: {
+                            color: 3447003,
+                            description: "Veuillez cliquer sur l'émoji"
+                        }
+                    }).then(
+                        async sentMessage => {
+                            await sentMessage.react("✅").then(() => {
+                                sentMessage.awaitReactions(filter, {time: 5000})
+                                    .then(collected =>
+                                        message.author.send(collected
+                                            .map(userReactions => userReactions.users.cache.map(n => n.username))))
+                            })
                         })
                 }
             );
