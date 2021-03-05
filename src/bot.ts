@@ -29,7 +29,7 @@ export class Bot {
         this.reactRoll = reactRoll;
         this.cronSaintMessage = cronSaintMessage;
         this.saintMessage = saintMessage;
-    }
+      }
 
     public listen(): Promise<string> {
         this.client.on('message', (message: Message) => {
@@ -49,10 +49,7 @@ export class Bot {
 
         this.client.on('messageReactionAdd', (reaction) => {
             this.reactRoll.handle(reaction).then(() => {
-
             });
-
-
         })
 
         this.client.on('message', (message) => {
