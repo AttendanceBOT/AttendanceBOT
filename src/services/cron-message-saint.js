@@ -26,9 +26,9 @@ let CronSaintMessage = class CronSaintMessage {
         this.client = client;
     }
     handle() {
-        var channel = this.client.channels.cache.get("808337221806719036");
+        var channel = this.client.channels.cache.get("787995923706806286");
         cron.schedule('0 9 * * *', () => {
-            axios.get(`http://fetedujour.fr/api/v2/${this.key}/json-normal`)
+            axios.get(`http://fetedujour.fr/api/v2/${this.key}/json-normal-${this.dateFormat.dayAPI()}-${this.dateFormat.monthAPI()}`)
                 .then((res) => {
                 channel.send(`Nous sommes le ${this.dateFormat.dateFR()}, bonne fête aux ${res.data.name}`);
             })

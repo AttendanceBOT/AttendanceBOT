@@ -14,6 +14,12 @@ let DateFormat = class DateFormat {
     dateFR() {
         return date_fns_1.format(new Date(), 'dd/MM/yyyy HH:mm:ss', { locale: locale_1.fr });
     }
+    monthAPI() {
+        return date_fns_1.format(new Date(), 'M');
+    }
+    dayAPI() {
+        return date_fns_1.format(new Date(), 'd');
+    }
 };
 DateFormat = __decorate([
     inversify_1.injectable()

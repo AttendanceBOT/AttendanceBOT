@@ -1,4 +1,3 @@
-
 import {Client, Message} from "discord.js";
 import {inject, injectable} from "inversify";
 import {TYPES} from "../types";
@@ -24,15 +23,13 @@ export class Bot {
         @inject(TYPES.CronSaintMessage) cronSaintMessage: CronSaintMessage,
         @inject(TYPES.SaintMessage) saintMessage: SaintMessage,
     ) {
-
-        @inject(TYPES.ReactRoll) reactRoll: ReactRoll){
         this.client = client;
         this.token = token;
         this.embedRoll = embedRoll;
         this.reactRoll = reactRoll;
         this.cronSaintMessage = cronSaintMessage;
         this.saintMessage = saintMessage;
-      }
+    }
 
     public listen(): Promise<string> {
         this.client.on('message', (message: Message) => {
