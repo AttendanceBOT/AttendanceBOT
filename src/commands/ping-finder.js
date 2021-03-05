@@ -17,7 +17,7 @@ const inversify_1 = require("inversify");
 const types_1 = require("../../types");
 let PingFinder = class PingFinder {
     constructor(prefix) {
-        this.regexp = 'appel ';
+        this.regexp = 'app';
         this.idRole = [];
         this.prefix = prefix;
     }

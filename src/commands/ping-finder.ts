@@ -5,7 +5,7 @@ import {TYPES} from "../../types";
 @injectable()
 export class PingFinder {
 
-    private regexp = 'appel ';
+    private regexp = 'app';
     private readonly prefix: string;
     private idRole: string[] = [];
 
