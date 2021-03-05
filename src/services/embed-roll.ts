@@ -18,23 +18,26 @@ export class EmbedRoll {
     }
 
     handle(message: Message): Promise<Message | Message[]> {
+
+        let userTestStatus = new Array();
+        console.log(this.pingFinder.getRolePermission().length)
+
+        for (var i = 0; i < this.pingFinder.getRolePermission().length; i++) {
+
+            userTestStatus.push({id: this.pingFinder.getRolePermission()[i], allow: ['ADD_REACTIONS', 'VIEW_CHANNEL']});
+        }
+
+        userTestStatus.push({id: "787995922830983169", deny: ['VIEW_CHANNEL']});
+
         let studentsRoll = new Collection();
         const filter = reaction => reaction.emoji.name === '✅';
         if (this.pingFinder.isTriggerCommand(message.content) && message.member.roles?.cache.find(r => r.name === "Professeur")) {
             message.guild.channels.create('appel ' + this.pingFinder.getRolePermission(), {
                 type: 'text',
-                permissionOverwrites: [
-                    {
-                        id: "816947569561305148",
-                        allow: ['ADD_REACTIONS','VIEW_CHANNEL']
-                    }, {
-                        id: message.guild.roles.everyone.id,
-                        deny: ['VIEW_CHANNEL']
-                    }
-                ]
+                permissionOverwrites: [...userTestStatus]
 
             }).then((channelCreate) => {
-                channelCreate.overwritePermissions('816947631279308820', { SEND_MESSAGES: true, ADD_REACTIONS: true});                    channelCreate.send({
+                    channelCreate.send({
                         embed: {
                             color: 3447003,
                             description: "Veuillez cliquer sur l'émoji"

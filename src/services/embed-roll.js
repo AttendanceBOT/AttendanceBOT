@@ -34,22 +34,19 @@ let EmbedRoll = class EmbedRoll {
     }
     handle(message) {
         var _a;
+        let userTestStatus = new Array();
+        console.log(this.pingFinder.getRolePermission().length);
+        for (var i = 0; i < this.pingFinder.getRolePermission().length; i++) {
+            userTestStatus.push({ id: this.pingFinder.getRolePermission()[i], allow: ['ADD_REACTIONS', 'VIEW_CHANNEL'] });
+        }
+        userTestStatus.push({ id: "787995922830983169", deny: ['VIEW_CHANNEL'] });
         let studentsRoll = new discord_js_1.Collection();
         const filter = reaction => reaction.emoji.name === '✅';
         if (this.pingFinder.isTriggerCommand(message.content) && ((_a = message.member.roles) === null || _a === void 0 ? void 0 : _a.cache.find(r => r.name === "Professeur"))) {
             message.guild.channels.create('appel ' + this.pingFinder.getRolePermission(), {
                 type: 'text',
-                permissionOverwrites: [
-                    {
-                        id: "816947569561305148",
-                        allow: ['ADD_REACTIONS', 'VIEW_CHANNEL']
-                    }, {
-                        id: message.guild.roles.everyone.id,
-                        deny: ['VIEW_CHANNEL']
-                    }
-                ]
+                permissionOverwrites: [...userTestStatus]
             }).then((channelCreate) => {
-                channelCreate.overwritePermissions('816947631279308820', { SEND_MESSAGES: true, ADD_REACTIONS: true });
                 channelCreate.send({
                     embed: {
                         color: 3447003,
