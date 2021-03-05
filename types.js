@@ -9,5 +9,8 @@ exports.TYPES = {
     PingFinder: Symbol("PingFinder"),
     ReactRoll: Symbol("ReactRool"),
     DateFormat: Symbol("DateFormat"),
+    Help: Symbol("Help"),
+    HelpRes: Symbol("HelpRes"),
+    ActivityGame: Symbol("ActivityGame")
 };
 //# sourceMappingURL=types.js.map

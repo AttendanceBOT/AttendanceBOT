@@ -6,4 +6,5 @@ export const TYPES = {
     PingFinder: Symbol("PingFinder"),
     ReactRoll: Symbol("ReactRool"),
     DateFormat: Symbol("DateFormat"),
+    ActivityGame: Symbol("ActivityGame")
 };
