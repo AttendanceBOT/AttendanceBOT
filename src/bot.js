@@ -34,12 +34,12 @@ let Bot = class Bot {
                 return;
             }
             console.log("Message received! Contents: ", message.content);
-            this.embedRoll.handle(message).then(() => {
+            this.pingfinder.handle(message).then(() => {
                 console.log("Response sent!");
             }).catch(() => {
                 console.log("Response not sent.");
             });
-            this.pingfinder.handle(message).then(() => {
+            this.embedRoll.handle(message).then(() => {
                 console.log("Response sent!");
             }).catch(() => {
                 console.log("Response not sent.");

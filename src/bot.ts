@@ -37,18 +37,18 @@ export class Bot {
 
             console.log("Message received! Contents: ", message.content);
 
-            this.embedRoll.handle(message).then(() => {
-                console.log("Response sent!");
-            }).catch(() => {
-                console.log("Response not sent.")
-            })
-   
             this.pingfinder.handle(message).then(() => {
                 console.log("Response sent!");
             }).catch(() => {
                 console.log("Response not sent.")
             }) 
 
+            this.embedRoll.handle(message).then(() => {
+                console.log("Response sent!");
+            }).catch(() => {
+                console.log("Response not sent.")
+            })
+   
         });
        
         return this.client.login(this.token);

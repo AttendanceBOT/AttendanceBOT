@@ -19,16 +19,20 @@ let PingFinder = class PingFinder {
         if (!message.content.startsWith(this.regexp))
             return;
         let allRole = [];
-        const args = message.content.slice(this.regexp.length).trim().split(' ');
+        let tabelement = [];
+        const args = (message.content.slice(this.regexp.length).trim().split(' '));
+        const elementofargs = args.map(a => tabelement.push(a.substring(3, 21)));
         const command = args.shift().toLowerCase();
-        message.guild.roles.cache.map(role => allRole.push(role.id));
+        message.guild.roles.cache.map(role => allRole.push(role.id));    
         for (var i = 0; i < allRole.length; i++) {
-            if (command.substring(3, 21).toString() === allRole[i]) {
-                let getRole = message.guild.roles.cache.find((role) => role.id === command.substring(3, 21).toString());
-                message.channel.send("Vous avez lancé l'appel pour les " + getRole.name);
-                this.setRolePermission(command.substring(3, 21).toString());
+            for (var j = 0; j < tabelement.length; j++) {
+                if (tabelement[j] === allRole[i]) {
+                    // message.channel.send("Vous avez lancé l'appel pour " + tabelement[j]);
+                    this.getRole = message.guild.roles.cache.find((role) => role.id === tabelement[j]);
+                    message.channel.send("Vous avez lancé l'appel pour les " + this.getRole.name);                   
+                }                
             }
-        }
+        }       
         return Promise.reject();
     }
     getRolePermission() {

@@ -17,10 +17,10 @@ export class EmbedRoll {
         this.pingFinder = pingFinder;
         this.dateFormat = dateFR;
     }
-
+  
     handle(message: Message): Promise<Message | Message[]> {
         let studentsRoll = [];
-        let nomRoleDedie = this.pingFinder.getRolePermission();
+        let nomRoleDedie = this.pingFinder.getRolePermission(); 
         const filter = reaction => reaction.emoji.name === '✅' && message.member.roles.cache.has(nomRoleDedie);
         if (this.pingFinder.isTriggerCommand(message.content) && message.member.roles?.cache.find(r => r.name === "Professeur")) {
             message.channel.send({
