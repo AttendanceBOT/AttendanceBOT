@@ -65,8 +65,8 @@
 ## Action 8 : En tant que professeur, quand l’appel est terminé, je peux générer la feuille de présence
 
 * Le professeur écrit dans le channel :
-    * **!feuille**
-* Le bot demande confirmation “êtes-vous sûr de vouloir générer la feuille d’émargement ?”.
+    * **!feuille @Groupe 2xx**
+* Le bot demande confirmation “êtes-vous sûr de vouloir générer la feuille d’émargement du groupe en question ?”.
 * Le professeur écrit :
     * o : pour oui
     * n : pour non
