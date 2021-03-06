@@ -15,13 +15,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.HelpRes = void 0;
 const inversify_1 = require("inversify");
 const types_1 = require("../../types");
-const help_1 = require("./help");
+const help_trigger_1 = require("../commands/help-trigger");
 let HelpRes = class HelpRes {
-    constructor(help) {
-        this.help = help;
+    constructor(helpTrigger) {
+        this.helpTrigger = helpTrigger;
     }
     handle(message) {
-        if (this.help.isPing(message.content)) {
+        if (this.helpTrigger.isTrigger(message.content)) {
             return message.channel.send({ embed: {
                     color: 3447003,
                     title: "**LISTE DES COMMANDES D'ATTENDANCEBOT**",
@@ -50,8 +50,8 @@ let HelpRes = class HelpRes {
 };
 HelpRes = __decorate([
     inversify_1.injectable(),
-    __param(0, inversify_1.inject(types_1.TYPES.Help)),
-    __metadata("design:paramtypes", [help_1.Help])
+    __param(0, inversify_1.inject(types_1.TYPES.HelpTrigger)),
+    __metadata("design:paramtypes", [help_trigger_1.HelpTrigger])
 ], HelpRes);
 exports.HelpRes = HelpRes;
 //# sourceMappingURL=help-res.js.map

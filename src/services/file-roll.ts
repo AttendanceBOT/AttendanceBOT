@@ -1,5 +1,3 @@
-import { Message, MessageAttachment } from "discord.js";
-import { FileFinder } from "./file-finder";
 import { inject, injectable } from "inversify";
 import { TYPES } from "../../types";
 import { DateFormat } from "../utils/date";
@@ -9,15 +7,11 @@ var stringify = require('csv-stringify');
 
 @injectable()
 export class FileRoll {
-    private fileFinder: FileFinder;
     private dateFormat: DateFormat;
-    private message: Message;
 
     constructor(
-        @inject(TYPES.FileFinder) fileFinder: FileFinder,
         @inject(TYPES.DateFormat) dateFormat: DateFormat
     ) {
-        this.fileFinder = fileFinder;
         this.dateFormat = dateFormat;
     }
 
@@ -34,7 +28,6 @@ export class FileRoll {
         };
 
         for (var i = 1; i < students.length; i++) {
-            //data.push([i, this.embedRoll.getStudentsAfterRoll()[i]]);
             data.push([i, students[i], "OK", this.dateFormat.dateCSV()]);
         }
 

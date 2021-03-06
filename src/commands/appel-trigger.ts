@@ -3,7 +3,7 @@ import { Message } from "discord.js";
 import { TYPES } from "../../types";
 
 @injectable()
-export class PingFinder {
+export class AppelTrigger {
 
     private regexp = 'appel';
     private readonly prefix: string;
@@ -13,13 +13,13 @@ export class PingFinder {
         this.prefix = prefix;
     }
 
-    public isTriggerCommand(stringToSearch: string): boolean {
+    public isTrigger(stringToSearch: string): boolean {
         const args = stringToSearch.slice(this.prefix.length).trim().split(/ +/);
         return stringToSearch.startsWith(this.prefix) && stringToSearch.search(this.regexp) >= 0 && args.length > 1;
     }
 
     handle(message: Message): Promise<Message | Message[]> {
-        if (this.isTriggerCommand(message.content)) {
+        if (this.isTrigger(message.content)) {
             if (message.author.bot) return;
             const args = message.content.slice(this.prefix.length).trim().split(/ +/);
 
@@ -31,7 +31,6 @@ export class PingFinder {
                 this.idRole.push(args[i].substring(3).slice(0, -1));
             }
 
-            message.channel.send(this.getRolePermission())
         }
         return Promise.reject();
     }

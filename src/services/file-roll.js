@@ -13,15 +13,13 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FileRoll = void 0;
-const file_finder_1 = require("./file-finder");
 const inversify_1 = require("inversify");
 const types_1 = require("../../types");
 const date_1 = require("../utils/date");
 var fs = require('fs');
 var stringify = require('csv-stringify');
 let FileRoll = class FileRoll {
-    constructor(fileFinder, dateFormat) {
-        this.fileFinder = fileFinder;
+    constructor(dateFormat) {
         this.dateFormat = dateFormat;
     }
     handle(students = []) {
@@ -34,7 +32,6 @@ let FileRoll = class FileRoll {
             Date: 'Date'
         };
         for (var i = 1; i < students.length; i++) {
-            //data.push([i, this.embedRoll.getStudentsAfterRoll()[i]]);
             data.push([i, students[i], "OK", this.dateFormat.dateCSV()]);
         }
         stringify(data, { header: true, columns: columns }, (err, output) => {
@@ -64,10 +61,8 @@ let FileRoll = class FileRoll {
 };
 FileRoll = __decorate([
     inversify_1.injectable(),
-    __param(0, inversify_1.inject(types_1.TYPES.FileFinder)),
-    __param(1, inversify_1.inject(types_1.TYPES.DateFormat)),
-    __metadata("design:paramtypes", [file_finder_1.FileFinder,
-        date_1.DateFormat])
+    __param(0, inversify_1.inject(types_1.TYPES.DateFormat)),
+    __metadata("design:paramtypes", [date_1.DateFormat])
 ], FileRoll);
 exports.FileRoll = FileRoll;
 //# sourceMappingURL=file-roll.js.map

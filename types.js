@@ -7,15 +7,15 @@ exports.TYPES = {
     Token: Symbol("Token"),
     Key: Symbol("Key"),
     Prefix: Symbol("Prefix"),
+    HelpTrigger: Symbol("HelpTrigger"),
+    AppelTrigger: Symbol("AppelTrigger"),
+    SaintTrigger: Symbol("SaintTrigger"),
     EmbedRoll: Symbol("EmbedRoll"),
-    PingFinder: Symbol("PingFinder"),
     DateFormat: Symbol("DateFormat"),
-    ActivityGame: Symbol("ActivityGame"),
-    CronSaintMessage: Symbol("CronSaintMessage"),
     SaintMessage: Symbol("SaintMessage"),
-    Help: Symbol("Help"),
     HelpRes: Symbol("HelpRes"),
-    FileFinder: Symbol("FileFinder"),
-    FileRoll: Symbol("FileRoll")
+    FileRoll: Symbol("FileRoll"),
+    ActivityGame: Symbol("ActivityGame"),
+    CronSaintMessage: Symbol("CronSaintMessage")
 };
 //# sourceMappingURL=types.js.map

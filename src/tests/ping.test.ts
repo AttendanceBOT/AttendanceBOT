@@ -1,32 +1,37 @@
 import "reflect-metadata";
 import 'mocha';
 import {expect} from 'chai';
-import {PingFinder} from "../../src/commands/ping-finder"
+import {AppelTrigger} from "../commands/appel-trigger"
 import {EmbedRoll} from "../services/embed-roll";
 import {instance, mock, verify, when} from "ts-mockito";
 import {Message} from "discord.js";
 import {DateFormat} from "../utils/date";
+import {FileRoll} from "../services/file-roll";
 
 describe('EmbedRoll', () => {
-    let mockedPingFinderClass: PingFinder;
-    let mockedPingFinderInstance: PingFinder;
+    let mockedPingFinderClass: AppelTrigger;
+    let mockedPingFinderInstance: AppelTrigger;
     let mockedMessageClass: Message;
     let mockedMessageInstance: Message;
     let mockedDateFNSClass: DateFormat;
     let mockedDateFNSInstance: DateFormat;
+    let mockedFileRoleClass: FileRoll;
+    let mockedFileRoleInstance: FileRoll;
 
     let service: EmbedRoll;
 
     beforeEach(() => {
-        mockedPingFinderClass = mock(PingFinder);
+        mockedPingFinderClass = mock(AppelTrigger);
         mockedPingFinderInstance = instance(mockedPingFinderClass);
         mockedDateFNSClass = mock(DateFormat);
         mockedDateFNSInstance = instance(mockedDateFNSClass);
         mockedMessageClass = mock(Message);
         mockedMessageInstance = instance(mockedMessageClass);
+        mockedFileRoleClass = mock(FileRoll);
+        mockedFileRoleInstance = instance(mockedFileRoleClass)
         setMessageContents();
 
-        service = new EmbedRoll(mockedPingFinderInstance, mockedDateFNSInstance);
+        service = new EmbedRoll(mockedPingFinderInstance, mockedDateFNSInstance, mockedFileRoleInstance);
     })
 
     it('should not reply', async () => {
@@ -47,6 +52,6 @@ describe('EmbedRoll', () => {
     }
 
     function whenIsPingThenReturn(result: boolean) {
-        when(mockedPingFinderClass.isTriggerCommand("Non-empty string")).thenReturn(result);
+        when(mockedPingFinderClass.isTrigger("Non-empty string")).thenReturn(result);
     }
 });
