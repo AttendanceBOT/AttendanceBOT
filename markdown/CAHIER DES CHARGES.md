@@ -14,7 +14,7 @@
 
 ### La feuille de présence
 
-1. La feuille de présence générée doit **ressembler à l'actuel** : le modèle Excel de feuille d'émargement (voire PDF ou CSV).
+1. La feuille de présence générée doit **ressembler à l'actuel** : le modèle Excel/CSV de feuille d'émargement (voire PDF).
 1. C'est le professeur qui est garant de la feuille de présence : il doit pouvoir **exporter la fiche de présence d’un cours**.
 1. Le mail d'envoi de la feuille de présence **part manuellement du prof**.
     * Le professeur télécharge manuellement la feuille de présence, vérifie puis envoie au secrétariat.

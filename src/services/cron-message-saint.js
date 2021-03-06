@@ -44,7 +44,8 @@ let CronSaintMessage = class CronSaintMessage {
 CronSaintMessage = __decorate([
     inversify_1.injectable(),
     __param(0, inversify_1.inject(types_1.TYPES.DateFormat)),
-    __param(1, inversify_1.inject(types_1.TYPES.Key)), __param(2, inversify_1.inject(types_1.TYPES.Client)),
+    __param(1, inversify_1.inject(types_1.TYPES.Key)),
+    __param(2, inversify_1.inject(types_1.TYPES.Client)),
     __metadata("design:paramtypes", [date_1.DateFormat, String, discord_js_1.Client])
 ], CronSaintMessage);
 exports.CronSaintMessage = CronSaintMessage;

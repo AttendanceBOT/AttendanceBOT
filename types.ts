@@ -10,5 +10,7 @@ export const TYPES = {
     DateFormat: Symbol("DateFormat"),
     ActivityGame: Symbol("ActivityGame"),
     CronSaintMessage: Symbol("CronSaintMessage"),
-    SaintMessage: Symbol("SaintMessage")    
+    SaintMessage: Symbol("SaintMessage"),
+    Help: Symbol("Help"),
+    HelpRes: Symbol("HelpRes")
 };

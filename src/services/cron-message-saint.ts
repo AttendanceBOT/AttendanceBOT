@@ -1,7 +1,7 @@
-import {Message, Client, TextChannel} from "discord.js";
-import {inject, injectable} from "inversify";
-import {TYPES} from "../../types";
-import {DateFormat} from "../utils/date";
+import { Message, Client, TextChannel } from "discord.js";
+import { inject, injectable } from "inversify";
+import { TYPES } from "../../types";
+import { DateFormat } from "../utils/date";
 
 const axios = require('axios');
 var cron = require('node-cron');
@@ -14,11 +14,13 @@ export class CronSaintMessage {
     private client: Client;
 
 
-    constructor(@inject(TYPES.DateFormat) dateFormat: DateFormat,
-                @inject(TYPES.Key) key: string, @inject(TYPES.Client) client: Client) {
-        this.dateFormat = dateFormat;
-        this.key = key;
-        this.client = client;
+    constructor(
+        @inject(TYPES.DateFormat) dateFormat: DateFormat,
+        @inject(TYPES.Key) key: string,
+        @inject(TYPES.Client) client: Client) {
+            this.dateFormat = dateFormat;
+            this.key = key;
+            this.client = client;
     }
 
     handle(): Promise<Message | Message[]> {

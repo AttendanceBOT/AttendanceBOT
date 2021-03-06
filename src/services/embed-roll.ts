@@ -1,8 +1,8 @@
-import {Collection, Message} from "discord.js";
-import {PingFinder} from "../commands/ping-finder";
-import {inject, injectable} from "inversify";
-import {TYPES} from "../../types";
-import {DateFormat} from "../utils/date";
+import { Collection, Message } from "discord.js";
+import { PingFinder } from "../commands/ping-finder";
+import { inject, injectable } from "inversify";
+import { TYPES } from "../../types";
+import { DateFormat } from "../utils/date";
 
 @injectable()
 export class EmbedRoll {
@@ -29,34 +29,37 @@ export class EmbedRoll {
                 });
             }
 
-            userTestStatus.push({id: "787995922830983169", deny: ['VIEW_CHANNEL']});
+            userTestStatus.push({ id: "787995922830983169", deny: ['VIEW_CHANNEL'] });
 
             message.guild.channels.create('appel ' + this.pingFinder.getRolePermission(), {
                 type: 'text',
                 permissionOverwrites: [...userTestStatus]
 
             }).then((channelCreate) => {
-                    channelCreate.send({
-                        embed: {
-                            color: 3447003,
-                            description: "Veuillez cliquer sur l'émoji"
-                        }
-                    }).then(
-                        async sentMessage => {
-                            await sentMessage.react("✅").then(() => {
-                                sentMessage.awaitReactions(filter, {time: 5000})
-                                    .then(collected =>
-                                        message.author.send(collected
-                                            .map(userReactions => userReactions.users.cache.map(n => n.username))))
-                            })
+                channelCreate.send({
+                    embed: {
+                        color: 3447003,
+                        description: "Veuillez cliquer sur l'émoji"
+                    }
+                }).then(
+                    async sentMessage => {
+                        await sentMessage.react("✅").then(() => {
+                            sentMessage.awaitReactions(filter, { time: 5000 })
+                                .then(collected =>
+                                    message.author.send(collected
+                                        .map(userReactions => userReactions.users.cache.map(n => n.username))))
                         })
-                }
+                    })
+            }
             );
         }
         setTimeout(() => {
             const channel = message.guild.channels.cache
                 .find((channel) => channel.name.startsWith("appel"));
-            channel.delete();
+            if (channel) {
+                channel.delete();
+            }
+            return;
         }, 10000);
         return Promise.reject();
     }

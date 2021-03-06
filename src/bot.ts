@@ -1,11 +1,12 @@
-import {Client, Message} from "discord.js";
-import {inject, injectable} from "inversify";
-import {TYPES} from "../types";
-import {BotPresence} from "./services/bot-presence";
-import {EmbedRoll} from "./services/embed-roll";
-import {CronSaintMessage} from "./services/cron-message-saint";
-import {SaintMessage} from "./services/message.saint";
+import { Client, Message } from "discord.js";
+import { inject, injectable } from "inversify";
+import { TYPES } from "../types";
+import { BotPresence } from "./services/bot-presence";
+import { EmbedRoll } from "./services/embed-roll";
+import { CronSaintMessage } from "./services/cron-message-saint";
+import { SaintMessage } from "./services/message.saint";
 import { PingFinder } from "./commands/ping-finder";
+import { HelpRes } from "./services/help-res";
 
 @injectable()
 export class Bot {
@@ -15,7 +16,8 @@ export class Bot {
     private embedRoll: EmbedRoll;
     private cronSaintMessage: CronSaintMessage;
     private saintMessage: SaintMessage;
-    private pingfinder : PingFinder;
+    private pingfinder: PingFinder;
+    private helpRes: HelpRes;
 
     constructor(
         @inject(TYPES.Client) client: Client,
@@ -24,8 +26,8 @@ export class Bot {
         @inject(TYPES.EmbedRoll) embedRoll: EmbedRoll,
         @inject(TYPES.CronSaintMessage) cronSaintMessage: CronSaintMessage,
         @inject(TYPES.SaintMessage) saintMessage: SaintMessage,
-        @inject(TYPES.PingFinder) pingfinder : PingFinder
-
+        @inject(TYPES.PingFinder) pingfinder: PingFinder,
+        @inject(TYPES.HelpRes) helpRes: HelpRes,
     ) {
         this.client = client;
         this.token = token;
@@ -34,6 +36,7 @@ export class Bot {
         this.cronSaintMessage = cronSaintMessage;
         this.saintMessage = saintMessage;
         this.pingfinder = pingfinder;
+        this.helpRes = helpRes;
     }
 
     public listen(): Promise<string> {
@@ -62,6 +65,12 @@ export class Bot {
             }).catch(() => {
                 console.log("Message sent.")
             })
+
+            this.helpRes.handle(message).then(() => {
+                console.log("Response sent!");
+            }).catch(() => {
+                console.log("Response not sent.")
+            })
         });
 
         this.client.on('ready', () => {
@@ -77,7 +86,6 @@ export class Bot {
                 console.log("Message sent automaticaly.")
             })
         });
-
         return this.client.login(this.token);
     }
 }
