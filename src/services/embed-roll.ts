@@ -34,7 +34,6 @@ export class EmbedRoll {
             message.guild.channels.create('appel ' + this.pingFinder.getRolePermission(), {
                 type: 'text',
                 permissionOverwrites: [...userTestStatus]
-
             }).then((channelCreate) => {
                 channelCreate.send({
                     embed: {
