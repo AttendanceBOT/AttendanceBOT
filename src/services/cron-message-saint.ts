@@ -6,13 +6,11 @@ import { DateFormat } from "../utils/date";
 const axios = require('axios');
 var cron = require('node-cron');
 
-
 @injectable()
 export class CronSaintMessage {
     private dateFormat: DateFormat;
     private readonly key: string;
     private client: Client;
-
 
     constructor(
         @inject(TYPES.DateFormat) dateFormat: DateFormat,
