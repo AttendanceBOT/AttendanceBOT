@@ -1,37 +1,42 @@
-import { Collection, Message } from "discord.js";
-import { PingFinder } from "../commands/ping-finder";
+import { Message } from "discord.js";
+import { AppelTrigger } from "../commands/appel-trigger";
 import { inject, injectable } from "inversify";
 import { TYPES } from "../../types";
 import { DateFormat } from "../utils/date";
+import { FileRoll } from "../services/file-roll";
 
 @injectable()
 export class EmbedRoll {
-    private pingFinder: PingFinder;
+    private appelTrigger: AppelTrigger;
     private dateFormat: DateFormat;
+    private studentsAfterRoll = [];
+    private fileRoll: FileRoll;
 
     constructor(
-        @inject(TYPES.PingFinder) pingFinder: PingFinder,
+        @inject(TYPES.AppelTrigger) appelTrigger: AppelTrigger,
         @inject(TYPES.DateFormat) dateFR: DateFormat,
+        @inject(TYPES.FileRoll) fileRoll: FileRoll
     ) {
-        this.pingFinder = pingFinder;
+        this.appelTrigger = appelTrigger;
         this.dateFormat = dateFR;
+        this.fileRoll = fileRoll;
     }
 
     handle(message: Message): Promise<Message | Message[]> {
         const filter = reaction => reaction.emoji.name === '✅';
-        if (this.pingFinder.isTriggerCommand(message.content) && message.member.roles?.cache.find(r => r.name === "Professeur")) {
+        if (this.appelTrigger.isTrigger(message.content) && message.member.roles?.cache.find(r => r.name === "Professeur")) {
             let userTestStatus = new Array();
 
-            for (var i = 0; i < this.pingFinder.getRolePermission().length; i++) {
+            for (var i = 0; i < this.appelTrigger.getRolePermission().length; i++) {
                 userTestStatus.push({
-                    id: this.pingFinder.getRolePermission()[i],
+                    id: this.appelTrigger.getRolePermission()[i],
                     allow: ['ADD_REACTIONS', 'VIEW_CHANNEL']
                 });
             }
 
             userTestStatus.push({ id: "787995922830983169", deny: ['VIEW_CHANNEL'] });
 
-            message.guild.channels.create('appel ' + this.pingFinder.getRolePermission(), {
+            message.guild.channels.create('appel ' + this.appelTrigger.getRolePermission(), {
                 type: 'text',
                 permissionOverwrites: [...userTestStatus]
             }).then((channelCreate) => {
@@ -43,15 +48,18 @@ export class EmbedRoll {
                 }).then(
                     async sentMessage => {
                         await sentMessage.react("✅").then(() => {
-                            sentMessage.awaitReactions(filter, { time: 5000 })
-                                .then(collected =>
-                                    message.author.send(collected
-                                        .map(userReactions => userReactions.users.cache.map(n => n.username))))
+                            sentMessage.awaitReactions(filter, { time: 120000 })
+                                .then(collected => collected
+                                    .map(userReactions => this.studentsAfterRoll = userReactions.users.cache.map(name => message.guild.members.cache.get(name.id).nickname))
+                                ).then(() => {
+                                    message.author.send(this.fileRoll.handle(this.studentsAfterRoll));
+                                })
                         })
                     })
             }
             );
         }
+
         setTimeout(() => {
             const channel = message.guild.channels.cache
                 .find((channel) => channel.name.startsWith("appel"));
@@ -59,7 +67,12 @@ export class EmbedRoll {
                 channel.delete();
             }
             return;
-        }, 10000);
+        }, 130000);
+
         return Promise.reject();
+    }
+
+    public getStudentsAfterRoll() {
+        return this.studentsAfterRoll;
     }
 }

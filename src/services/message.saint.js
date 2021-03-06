@@ -17,15 +17,17 @@ const discord_js_1 = require("discord.js");
 const inversify_1 = require("inversify");
 const types_1 = require("../../types");
 const date_1 = require("../utils/date");
+const saint_trigger_1 = require("../commands/saint-trigger");
 const axios = require('axios');
 let SaintMessage = class SaintMessage {
-    constructor(dateFormat, key, client) {
+    constructor(dateFormat, key, client, saintTrigger) {
         this.dateFormat = dateFormat;
         this.key = key;
         this.client = client;
+        this.saintTrigger = saintTrigger;
     }
     handleMessage(message) {
-        if (message.content === "!saint") {
+        if (this.saintTrigger.isTrigger(message.content)) {
             axios.get(`http://fetedujour.fr/api/v2/${this.key}/json-normal-${this.dateFormat.dayAPI()}-${this.dateFormat.monthAPI()}`)
                 .then((res) => {
                 message.channel.send(`Nous sommes le ${this.dateFormat.dateFR()}, bonne fête aux ${res.data.name}`);
@@ -40,8 +42,8 @@ let SaintMessage = class SaintMessage {
 SaintMessage = __decorate([
     inversify_1.injectable(),
     __param(0, inversify_1.inject(types_1.TYPES.DateFormat)),
-    __param(1, inversify_1.inject(types_1.TYPES.Key)), __param(2, inversify_1.inject(types_1.TYPES.Client)),
-    __metadata("design:paramtypes", [date_1.DateFormat, String, discord_js_1.Client])
+    __param(1, inversify_1.inject(types_1.TYPES.Key)), __param(2, inversify_1.inject(types_1.TYPES.Client)), __param(3, inversify_1.inject(types_1.TYPES.SaintTrigger)),
+    __metadata("design:paramtypes", [date_1.DateFormat, String, discord_js_1.Client, saint_trigger_1.SaintTrigger])
 ], SaintMessage);
 exports.SaintMessage = SaintMessage;
 //# sourceMappingURL=message.saint.js.map

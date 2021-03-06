@@ -20,6 +20,9 @@ let DateFormat = class DateFormat {
     dayAPI() {
         return date_fns_1.format(new Date(), 'd');
     }
+    dateCSV() {
+        return date_fns_1.format(new Date(), 'dd/MM/yyyy HH:mm', { locale: locale_1.fr });
+    }
 };
 DateFormat = __decorate([
     inversify_1.injectable()

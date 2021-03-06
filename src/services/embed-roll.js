@@ -22,28 +22,31 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmbedRoll = void 0;
-const ping_finder_1 = require("../commands/ping-finder");
+const appel_trigger_1 = require("../commands/appel-trigger");
 const inversify_1 = require("inversify");
 const types_1 = require("../../types");
 const date_1 = require("../utils/date");
+const file_roll_1 = require("../services/file-roll");
 let EmbedRoll = class EmbedRoll {
-    constructor(pingFinder, dateFR) {
-        this.pingFinder = pingFinder;
+    constructor(appelTrigger, dateFR, fileRoll) {
+        this.studentsAfterRoll = [];
+        this.appelTrigger = appelTrigger;
         this.dateFormat = dateFR;
+        this.fileRoll = fileRoll;
     }
     handle(message) {
         var _a;
         const filter = reaction => reaction.emoji.name === '✅';
-        if (this.pingFinder.isTriggerCommand(message.content) && ((_a = message.member.roles) === null || _a === void 0 ? void 0 : _a.cache.find(r => r.name === "Professeur"))) {
+        if (this.appelTrigger.isTrigger(message.content) && ((_a = message.member.roles) === null || _a === void 0 ? void 0 : _a.cache.find(r => r.name === "Professeur"))) {
             let userTestStatus = new Array();
-            for (var i = 0; i < this.pingFinder.getRolePermission().length; i++) {
+            for (var i = 0; i < this.appelTrigger.getRolePermission().length; i++) {
                 userTestStatus.push({
-                    id: this.pingFinder.getRolePermission()[i],
+                    id: this.appelTrigger.getRolePermission()[i],
                     allow: ['ADD_REACTIONS', 'VIEW_CHANNEL']
                 });
             }
             userTestStatus.push({ id: "787995922830983169", deny: ['VIEW_CHANNEL'] });
-            message.guild.channels.create('appel ' + this.pingFinder.getRolePermission(), {
+            message.guild.channels.create('appel ' + this.appelTrigger.getRolePermission(), {
                 type: 'text',
                 permissionOverwrites: [...userTestStatus]
             }).then((channelCreate) => {
@@ -54,9 +57,11 @@ let EmbedRoll = class EmbedRoll {
                     }
                 }).then((sentMessage) => __awaiter(this, void 0, void 0, function* () {
                     yield sentMessage.react("✅").then(() => {
-                        sentMessage.awaitReactions(filter, { time: 5000 })
-                            .then(collected => message.author.send(collected
-                            .map(userReactions => userReactions.users.cache.map(n => n.username))));
+                        sentMessage.awaitReactions(filter, { time: 120000 })
+                            .then(collected => collected
+                            .map(userReactions => this.studentsAfterRoll = userReactions.users.cache.map(name => message.guild.members.cache.get(name.id).nickname))).then(() => {
+                            message.author.send(this.fileRoll.handle(this.studentsAfterRoll));
+                        });
                     });
                 }));
             });
@@ -68,16 +73,21 @@ let EmbedRoll = class EmbedRoll {
                 channel.delete();
             }
             return;
-        }, 10000);
+        }, 130000);
         return Promise.reject();
+    }
+    getStudentsAfterRoll() {
+        return this.studentsAfterRoll;
     }
 };
 EmbedRoll = __decorate([
     inversify_1.injectable(),
-    __param(0, inversify_1.inject(types_1.TYPES.PingFinder)),
+    __param(0, inversify_1.inject(types_1.TYPES.AppelTrigger)),
     __param(1, inversify_1.inject(types_1.TYPES.DateFormat)),
-    __metadata("design:paramtypes", [ping_finder_1.PingFinder,
-        date_1.DateFormat])
+    __param(2, inversify_1.inject(types_1.TYPES.FileRoll)),
+    __metadata("design:paramtypes", [appel_trigger_1.AppelTrigger,
+        date_1.DateFormat,
+        file_roll_1.FileRoll])
 ], EmbedRoll);
 exports.EmbedRoll = EmbedRoll;
 //# sourceMappingURL=embed-roll.js.map

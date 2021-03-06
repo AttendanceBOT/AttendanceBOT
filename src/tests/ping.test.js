@@ -12,11 +12,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 require("mocha");
 const chai_1 = require("chai");
-const ping_finder_1 = require("../../src/commands/ping-finder");
+const appel_trigger_1 = require("../commands/appel-trigger");
 const embed_roll_1 = require("../services/embed-roll");
 const ts_mockito_1 = require("ts-mockito");
 const discord_js_1 = require("discord.js");
 const date_1 = require("../utils/date");
+const file_roll_1 = require("../services/file-roll");
 describe('EmbedRoll', () => {
     let mockedPingFinderClass;
     let mockedPingFinderInstance;
@@ -24,16 +25,20 @@ describe('EmbedRoll', () => {
     let mockedMessageInstance;
     let mockedDateFNSClass;
     let mockedDateFNSInstance;
+    let mockedFileRoleClass;
+    let mockedFileRoleInstance;
     let service;
     beforeEach(() => {
-        mockedPingFinderClass = ts_mockito_1.mock(ping_finder_1.PingFinder);
+        mockedPingFinderClass = ts_mockito_1.mock(appel_trigger_1.AppelTrigger);
         mockedPingFinderInstance = ts_mockito_1.instance(mockedPingFinderClass);
         mockedDateFNSClass = ts_mockito_1.mock(date_1.DateFormat);
         mockedDateFNSInstance = ts_mockito_1.instance(mockedDateFNSClass);
         mockedMessageClass = ts_mockito_1.mock(discord_js_1.Message);
         mockedMessageInstance = ts_mockito_1.instance(mockedMessageClass);
+        mockedFileRoleClass = ts_mockito_1.mock(file_roll_1.FileRoll);
+        mockedFileRoleInstance = ts_mockito_1.instance(mockedFileRoleClass);
         setMessageContents();
-        service = new embed_roll_1.EmbedRoll(mockedPingFinderInstance, mockedDateFNSInstance);
+        service = new embed_roll_1.EmbedRoll(mockedPingFinderInstance, mockedDateFNSInstance, mockedFileRoleInstance);
     });
     it('should not reply', () => __awaiter(void 0, void 0, void 0, function* () {
         whenIsPingThenReturn(false);
@@ -49,7 +54,7 @@ describe('EmbedRoll', () => {
         mockedMessageInstance.content = "Non-empty string";
     }
     function whenIsPingThenReturn(result) {
-        ts_mockito_1.when(mockedPingFinderClass.isTriggerCommand("Non-empty string")).thenReturn(result);
+        ts_mockito_1.when(mockedPingFinderClass.isTrigger("Non-empty string")).thenReturn(result);
     }
 });
 //# sourceMappingURL=ping.test.js.map

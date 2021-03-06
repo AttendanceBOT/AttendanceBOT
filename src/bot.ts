@@ -5,7 +5,7 @@ import { BotPresence } from "./services/bot-presence";
 import { EmbedRoll } from "./services/embed-roll";
 import { CronSaintMessage } from "./services/cron-message-saint";
 import { SaintMessage } from "./services/message.saint";
-import { PingFinder } from "./commands/ping-finder";
+import { AppelTrigger } from "./commands/appel-trigger";
 import { HelpRes } from "./services/help-res";
 
 @injectable()
@@ -16,7 +16,7 @@ export class Bot {
     private embedRoll: EmbedRoll;
     private cronSaintMessage: CronSaintMessage;
     private saintMessage: SaintMessage;
-    private pingfinder: PingFinder;
+    private appelTrigger: AppelTrigger;
     private helpRes: HelpRes;
 
     constructor(
@@ -26,7 +26,7 @@ export class Bot {
         @inject(TYPES.EmbedRoll) embedRoll: EmbedRoll,
         @inject(TYPES.CronSaintMessage) cronSaintMessage: CronSaintMessage,
         @inject(TYPES.SaintMessage) saintMessage: SaintMessage,
-        @inject(TYPES.PingFinder) pingfinder: PingFinder,
+        @inject(TYPES.AppelTrigger) appelTrigger: AppelTrigger,
         @inject(TYPES.HelpRes) helpRes: HelpRes,
     ) {
         this.client = client;
@@ -35,7 +35,7 @@ export class Bot {
         this.botPresence = botPresence;
         this.cronSaintMessage = cronSaintMessage;
         this.saintMessage = saintMessage;
-        this.pingfinder = pingfinder;
+        this.appelTrigger = appelTrigger;
         this.helpRes = helpRes;
     }
 
@@ -48,7 +48,7 @@ export class Bot {
 
             console.log("Message received! Contents: ", message.content);
 
-            this.pingfinder.handle(message).then(() => {
+            this.appelTrigger.handle(message).then(() => {
                 console.log("Response sent!");
             }).catch(() => {
                 console.log("Response not sent.")
@@ -60,16 +60,16 @@ export class Bot {
                 console.log("Response not sent.")
             })
 
-            this.saintMessage.handleMessage(message).then(() => {
-                console.log("Message not sent");
-            }).catch(() => {
-                console.log("Message sent.")
-            })
-
             this.helpRes.handle(message).then(() => {
                 console.log("Response sent!");
             }).catch(() => {
                 console.log("Response not sent.")
+            })
+
+            this.saintMessage.handleMessage(message).then(() => {
+                console.log("Message not sent");
+            }).catch(() => {
+                console.log("Message sent.")
             })
         });
 
@@ -86,6 +86,7 @@ export class Bot {
                 console.log("Message sent automaticaly.")
             })
         });
+
         return this.client.login(this.token);
     }
 }

@@ -1,27 +1,27 @@
 import { Message } from "discord.js";
 import { inject, injectable } from "inversify";
 import { TYPES } from "../../types";
-import { Help } from "./help";
+import { HelpTrigger } from "../commands/help-trigger";
 
 @injectable()
 export class HelpRes {
-  private help: Help;
+  private helpTrigger: HelpTrigger;
 
   constructor(
-    @inject(TYPES.Help) help: Help
+    @inject(TYPES.HelpTrigger) helpTrigger: HelpTrigger
   ) {
-    this.help = help;
+    this.helpTrigger = helpTrigger;
   }
 
   handle(message: Message): Promise<Message | Message[]> {
-    if (this.help.isPing(message.content)) {
+    if (this.helpTrigger.isTrigger(message.content)) {
       return message.channel.send({embed: {
         color: 3447003,
         title: "**LISTE DES COMMANDES D'ATTENDANCEBOT**",
         description: "AttendanceBot est un bot vous permettant de réaliser l'appel à votre place. Voici la liste des fonctions avec un exemple associé pour utiliser AttendanceBot.\n",
         fields: [{
             name: "Lancer un appel - !appel",
-            value: "• __Commande :__ **!appel** @Groupe xxx (nom du rôle du groupe : jusqu'à 4 groupes possibles). \n\n • __Description :__ seuls les personnes ayant le rôle _@Professeur_ peuvent lancer cette commande. Les personnes ayant le rôle désigné dans l'appel verront un channel _appel-xxxxx_ se créer et devront réagir avec :white_check_mark: pour valider leurs présences.\n\n :warning: Attention, un appel ne dure que 2 minutes. :warning: \n\n • __Exemple :__ ```!appel @Groupe 201```\n\n" 
+            value: "• __Commande :__ **!appel** @Groupe xxx (nom du rôle du groupe : jusqu'à 4 groupes possibles). \n\n • __Description :__ seuls les personnes ayant le rôle _@Professeur_ peuvent lancer cette commande. Les personnes ayant le rôle désigné dans l'appel verront un channel _appel-xxxxx_ se créer et devront réagir avec :white_check_mark: pour valider leurs présences.\n\n :warning: Attention, un appel ne dure que 2 minutes. :warning: \n\n • __Exemple :__ ```!appel @Groupe 201```\n\n"
           },
           {
             name: "Récupérer la feuille de présence - !feuille",
