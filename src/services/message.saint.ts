@@ -5,13 +5,11 @@ import { DateFormat } from "../utils/date";
 
 const axios = require('axios');
 
-
 @injectable()
 export class SaintMessage {
     private dateFormat: DateFormat;
     private readonly key: string;
     private client: Client;
-
 
     constructor(@inject(TYPES.DateFormat) dateFormat: DateFormat,
         @inject(TYPES.Key) key: string, @inject(TYPES.Client) client: Client) {
