@@ -11,6 +11,8 @@ import { SaintMessage } from "./src/services/message.saint";
 import { BotPresence } from "./src/services/bot-presence";
 import { Help } from "./src/services/help";
 import { HelpRes } from "./src/services/help-res";
+import {FileFinder} from "./src/services/file-finder";
+import {FileRoll} from "./src/services/file-roll";
 
 let container = new Container();
 
@@ -27,6 +29,8 @@ container.bind<CronSaintMessage>(TYPES.CronSaintMessage).to(CronSaintMessage).in
 container.bind<SaintMessage>(TYPES.SaintMessage).to(SaintMessage).inSingletonScope();
 container.bind<Help>(TYPES.Help).to(Help).inSingletonScope();
 container.bind<HelpRes>(TYPES.HelpRes).to(HelpRes).inSingletonScope();
+container.bind<FileFinder>(TYPES.FileFinder).to(FileFinder).inSingletonScope();
+container.bind<FileRoll>(TYPES.FileRoll).to(FileRoll).inSingletonScope();
 
 container.bind<BotPresence>(TYPES.ActivityGame).to(BotPresence).inSingletonScope();
 

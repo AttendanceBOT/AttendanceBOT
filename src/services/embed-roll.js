@@ -26,10 +26,13 @@ const ping_finder_1 = require("../commands/ping-finder");
 const inversify_1 = require("inversify");
 const types_1 = require("../../types");
 const date_1 = require("../utils/date");
+const file_roll_1 = require("../services/file-roll");
 let EmbedRoll = class EmbedRoll {
-    constructor(pingFinder, dateFR) {
+    constructor(pingFinder, dateFR, fileRoll) {
+        this.studentsAfterRoll = [];
         this.pingFinder = pingFinder;
         this.dateFormat = dateFR;
+        this.fileRoll = fileRoll;
     }
     handle(message) {
         var _a;
@@ -55,8 +58,11 @@ let EmbedRoll = class EmbedRoll {
                 }).then((sentMessage) => __awaiter(this, void 0, void 0, function* () {
                     yield sentMessage.react("✅").then(() => {
                         sentMessage.awaitReactions(filter, { time: 5000 })
-                            .then(collected => message.author.send(collected
-                            .map(userReactions => userReactions.users.cache.map(n => n.username))));
+                            .then(collected => collected
+                            .map(userReactions => this.studentsAfterRoll = userReactions.users.cache.map(name => message.guild.members.cache.get(name.id).nickname))).then(() => {
+                            message.channel.send(this.studentsAfterRoll);
+                            message.author.send(this.fileRoll.handle(this.studentsAfterRoll));
+                        });
                     });
                 }));
             });
@@ -71,13 +77,18 @@ let EmbedRoll = class EmbedRoll {
         }, 10000);
         return Promise.reject();
     }
+    getStudentsAfterRoll() {
+        return this.studentsAfterRoll;
+    }
 };
 EmbedRoll = __decorate([
     inversify_1.injectable(),
     __param(0, inversify_1.inject(types_1.TYPES.PingFinder)),
     __param(1, inversify_1.inject(types_1.TYPES.DateFormat)),
+    __param(2, inversify_1.inject(types_1.TYPES.FileRoll)),
     __metadata("design:paramtypes", [ping_finder_1.PingFinder,
-        date_1.DateFormat])
+        date_1.DateFormat,
+        file_roll_1.FileRoll])
 ], EmbedRoll);
 exports.EmbedRoll = EmbedRoll;
 //# sourceMappingURL=embed-roll.js.map

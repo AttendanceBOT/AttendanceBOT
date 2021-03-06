@@ -6,26 +6,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DateFormat = void 0;
+exports.FileFinder = void 0;
 const inversify_1 = require("inversify");
-const date_fns_1 = require("date-fns");
-const locale_1 = require("date-fns/locale");
-let DateFormat = class DateFormat {
-    dateFR() {
-        return date_fns_1.format(new Date(), 'dd/MM/yyyy HH:mm:ss', { locale: locale_1.fr });
+let FileFinder = class FileFinder {
+    constructor() {
+        this.regexp = '!feuille';
     }
-    monthAPI() {
-        return date_fns_1.format(new Date(), 'M');
-    }
-    dayAPI() {
-        return date_fns_1.format(new Date(), 'd');
-    }
-    dateCSV() {
-        return date_fns_1.format(new Date(), 'dd/MM/yyyy HH:mm', { locale: locale_1.fr });
+    isTriggerCommand(stringToSearch) {
+        return stringToSearch.search(this.regexp) >= 0;
     }
 };
-DateFormat = __decorate([
+FileFinder = __decorate([
     inversify_1.injectable()
-], DateFormat);
-exports.DateFormat = DateFormat;
-//# sourceMappingURL=date.js.map
+], FileFinder);
+exports.FileFinder = FileFinder;
+//# sourceMappingURL=file-finder.js.map

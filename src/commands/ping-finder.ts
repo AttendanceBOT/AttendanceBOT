@@ -5,7 +5,7 @@ import { TYPES } from "../../types";
 @injectable()
 export class PingFinder {
 
-    private regexp = 'app';
+    private regexp = 'appel';
     private readonly prefix: string;
     private idRole: string[] = [];
 
@@ -14,22 +14,25 @@ export class PingFinder {
     }
 
     public isTriggerCommand(stringToSearch: string): boolean {
-        return stringToSearch.search(this.regexp) >= 0;
+        const args = stringToSearch.slice(this.prefix.length).trim().split(/ +/);
+        return stringToSearch.startsWith(this.prefix) && stringToSearch.search(this.regexp) >= 0 && args.length > 1;
     }
 
     handle(message: Message): Promise<Message | Message[]> {
-        if (!message.content.startsWith(this.prefix) || message.author.bot) return;
-        const args = message.content.slice(this.prefix.length).trim().split(/ +/);
-        const command = args.shift().toLowerCase();
+        if (this.isTriggerCommand(message.content)) {
+            if (message.author.bot) return;
+            const args = message.content.slice(this.prefix.length).trim().split(/ +/);
 
-        this.idRole = [];
+            const command = args.shift().toLowerCase();
 
-        for (var i = 0; i < args.length; i++) {
-            this.idRole.push(args[i].substring(3).slice(0, -1));
+            this.idRole = [];
+
+            for (var i = 0; i < args.length; i++) {
+                this.idRole.push(args[i].substring(3).slice(0, -1));
+            }
+
+            message.channel.send(this.getRolePermission())
         }
-
-        message.channel.send(this.getRolePermission())
-
         return Promise.reject();
     }
 

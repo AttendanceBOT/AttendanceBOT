@@ -60,6 +60,13 @@ let Bot = class Bot {
             }).catch(() => {
                 console.log("Response not sent.");
             });
+            /*
+            this.fileRoll.handle(message).then(() => {
+                console.log("File sent!");
+            }).catch(() => {
+                console.log("File not sent.")
+            })
+            */
         });
         this.client.on('ready', () => {
             this.botPresence.handle().then(() => {

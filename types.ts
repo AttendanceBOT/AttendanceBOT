@@ -12,5 +12,7 @@ export const TYPES = {
     CronSaintMessage: Symbol("CronSaintMessage"),
     SaintMessage: Symbol("SaintMessage"),
     Help: Symbol("Help"),
-    HelpRes: Symbol("HelpRes")
+    HelpRes: Symbol("HelpRes"),
+    FileFinder: Symbol("FileFinder"),
+    FileRoll: Symbol("FileRoll")
 };

@@ -17,23 +17,26 @@ const inversify_1 = require("inversify");
 const types_1 = require("../../types");
 let PingFinder = class PingFinder {
     constructor(prefix) {
-        this.regexp = 'app';
+        this.regexp = 'appel';
         this.idRole = [];
         this.prefix = prefix;
     }
     isTriggerCommand(stringToSearch) {
-        return stringToSearch.search(this.regexp) >= 0;
+        const args = stringToSearch.slice(this.prefix.length).trim().split(/ +/);
+        return stringToSearch.startsWith(this.prefix) && stringToSearch.search(this.regexp) >= 0 && args.length > 1;
     }
     handle(message) {
-        if (!message.content.startsWith(this.prefix) || message.author.bot)
-            return;
-        const args = message.content.slice(this.prefix.length).trim().split(/ +/);
-        const command = args.shift().toLowerCase();
-        this.idRole = [];
-        for (var i = 0; i < args.length; i++) {
-            this.idRole.push(args[i].substring(3).slice(0, -1));
+        if (this.isTriggerCommand(message.content)) {
+            if (message.author.bot)
+                return;
+            const args = message.content.slice(this.prefix.length).trim().split(/ +/);
+            const command = args.shift().toLowerCase();
+            this.idRole = [];
+            for (var i = 0; i < args.length; i++) {
+                this.idRole.push(args[i].substring(3).slice(0, -1));
+            }
+            message.channel.send(this.getRolePermission());
         }
-        message.channel.send(this.getRolePermission());
         return Promise.reject();
     }
     getRolePermission() {

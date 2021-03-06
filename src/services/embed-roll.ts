@@ -3,18 +3,23 @@ import { PingFinder } from "../commands/ping-finder";
 import { inject, injectable } from "inversify";
 import { TYPES } from "../../types";
 import { DateFormat } from "../utils/date";
+import { FileRoll } from "../services/file-roll";
 
 @injectable()
 export class EmbedRoll {
     private pingFinder: PingFinder;
     private dateFormat: DateFormat;
+    private studentsAfterRoll = [];
+    private fileRoll: FileRoll;
 
     constructor(
         @inject(TYPES.PingFinder) pingFinder: PingFinder,
         @inject(TYPES.DateFormat) dateFR: DateFormat,
+        @inject(TYPES.FileRoll) fileRoll: FileRoll
     ) {
         this.pingFinder = pingFinder;
         this.dateFormat = dateFR;
+        this.fileRoll = fileRoll;
     }
 
     handle(message: Message): Promise<Message | Message[]> {
@@ -44,9 +49,12 @@ export class EmbedRoll {
                     async sentMessage => {
                         await sentMessage.react("✅").then(() => {
                             sentMessage.awaitReactions(filter, { time: 5000 })
-                                .then(collected =>
-                                    message.author.send(collected
-                                        .map(userReactions => userReactions.users.cache.map(n => n.username))))
+                                .then(collected => collected
+                                    .map(userReactions => this.studentsAfterRoll = userReactions.users.cache.map(name => message.guild.members.cache.get(name.id).nickname))
+                                ).then(() => {
+                                    message.channel.send(this.studentsAfterRoll);
+                                    message.author.send(this.fileRoll.handle(this.studentsAfterRoll));
+                                })
                         })
                     })
             }
@@ -60,6 +68,13 @@ export class EmbedRoll {
             }
             return;
         }, 10000);
+
+
+
         return Promise.reject();
+    }
+
+    public getStudentsAfterRoll() {
+        return this.studentsAfterRoll;
     }
 }

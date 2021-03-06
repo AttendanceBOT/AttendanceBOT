@@ -17,7 +17,7 @@ export class Bot {
     private cronSaintMessage: CronSaintMessage;
     private saintMessage: SaintMessage;
     private pingfinder: PingFinder;
-    private helpRes: HelpRes;
+    private helpRes: HelpRes;    
 
     constructor(
         @inject(TYPES.Client) client: Client,
@@ -71,6 +71,13 @@ export class Bot {
             }).catch(() => {
                 console.log("Response not sent.")
             })
+            /*
+            this.fileRoll.handle(message).then(() => {
+                console.log("File sent!");
+            }).catch(() => {
+                console.log("File not sent.")
+            })
+            */
         });
 
         this.client.on('ready', () => {
