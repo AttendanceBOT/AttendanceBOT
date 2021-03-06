@@ -16,18 +16,20 @@ exports.Bot = void 0;
 const discord_js_1 = require("discord.js");
 const inversify_1 = require("inversify");
 const types_1 = require("../types");
+const bot_presence_1 = require("./services/bot-presence");
 const embed_roll_1 = require("./services/embed-roll");
-const react_roll_1 = require("./services/react-roll");
 const cron_message_saint_1 = require("./services/cron-message-saint");
 const message_saint_1 = require("./services/message.saint");
+const ping_finder_1 = require("./commands/ping-finder");
 let Bot = class Bot {
-    constructor(client, token, embedRoll, reactRoll, cronSaintMessage, saintMessage) {
+    constructor(client, token, botPresence, embedRoll, cronSaintMessage, saintMessage, pingfinder) {
         this.client = client;
         this.token = token;
         this.embedRoll = embedRoll;
-        this.reactRoll = reactRoll;
+        this.botPresence = botPresence;
         this.cronSaintMessage = cronSaintMessage;
         this.saintMessage = saintMessage;
+        this.pingfinder = pingfinder;
     }
     listen() {
         this.client.on('message', (message) => {
@@ -36,17 +38,16 @@ let Bot = class Bot {
                 return;
             }
             console.log("Message received! Contents: ", message.content);
+            this.pingfinder.handle(message).then(() => {
+                console.log("Response sent!");
+            }).catch(() => {
+                console.log("Response not sent.");
+            });
             this.embedRoll.handle(message).then(() => {
                 console.log("Response sent!");
             }).catch(() => {
                 console.log("Response not sent.");
             });
-        });
-        this.client.on('messageReactionAdd', (reaction) => {
-            this.reactRoll.handle(reaction).then(() => {
-            });
-        });
-        this.client.on('message', (message) => {
             this.saintMessage.handleMessage(message).then(() => {
                 console.log("Message not sent");
             }).catch(() => {
@@ -54,6 +55,11 @@ let Bot = class Bot {
             });
         });
         this.client.on('ready', () => {
+            this.botPresence.handle().then(() => {
+                console.log("Response sent!");
+            }).catch(() => {
+                console.log("Response not sent.");
+            });
             this.cronSaintMessage.handle().then(() => {
                 console.log("Message not sent");
             }).catch(() => {
@@ -67,14 +73,16 @@ Bot = __decorate([
     inversify_1.injectable(),
     __param(0, inversify_1.inject(types_1.TYPES.Client)),
     __param(1, inversify_1.inject(types_1.TYPES.Token)),
-    __param(2, inversify_1.inject(types_1.TYPES.EmbedRoll)),
-    __param(3, inversify_1.inject(types_1.TYPES.ReactRoll)),
+    __param(2, inversify_1.inject(types_1.TYPES.ActivityGame)),
+    __param(3, inversify_1.inject(types_1.TYPES.EmbedRoll)),
     __param(4, inversify_1.inject(types_1.TYPES.CronSaintMessage)),
     __param(5, inversify_1.inject(types_1.TYPES.SaintMessage)),
-    __metadata("design:paramtypes", [discord_js_1.Client, String, embed_roll_1.EmbedRoll,
-        react_roll_1.ReactRoll,
+    __param(6, inversify_1.inject(types_1.TYPES.PingFinder)),
+    __metadata("design:paramtypes", [discord_js_1.Client, String, bot_presence_1.BotPresence,
+        embed_roll_1.EmbedRoll,
         cron_message_saint_1.CronSaintMessage,
-        message_saint_1.SaintMessage])
+        message_saint_1.SaintMessage,
+        ping_finder_1.PingFinder])
 ], Bot);
 exports.Bot = Bot;
 //# sourceMappingURL=bot.js.map

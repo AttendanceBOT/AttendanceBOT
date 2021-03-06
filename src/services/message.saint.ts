@@ -24,7 +24,6 @@ export class SaintMessage {
         if (message.content === "!saint") {
             axios.get(`http://fetedujour.fr/api/v2/${this.key}/json-normal-${this.dateFormat.dayAPI()}-${this.dateFormat.monthAPI()}`)
                 .then((res) => {
-                    console.log(res);
                     message.channel.send(`Nous sommes le ${this.dateFormat.dateFR()}, bonne fête aux ${res.data.name}`)
                 })
                 .catch((err) => {
