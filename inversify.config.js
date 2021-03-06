@@ -11,6 +11,8 @@ const date_1 = require("./src/utils/date");
 const cron_message_saint_1 = require("./src/services/cron-message-saint");
 const message_saint_1 = require("./src/services/message.saint");
 const bot_presence_1 = require("./src/services/bot-presence");
+const help_1 = require("./src/services/help");
+const help_res_1 = require("./src/services/help-res");
 let container = new inversify_1.Container();
 container.bind(types_1.TYPES.Bot).to(bot_1.Bot).inSingletonScope();
 container.bind(types_1.TYPES.Client).toConstantValue(new discord_js_1.Client());
@@ -22,6 +24,8 @@ container.bind(types_1.TYPES.PingFinder).to(ping_finder_1.PingFinder).inSingleto
 container.bind(types_1.TYPES.DateFormat).to(date_1.DateFormat).inSingletonScope();
 container.bind(types_1.TYPES.CronSaintMessage).to(cron_message_saint_1.CronSaintMessage).inSingletonScope();
 container.bind(types_1.TYPES.SaintMessage).to(message_saint_1.SaintMessage).inSingletonScope();
+container.bind(types_1.TYPES.Help).to(help_1.Help).inSingletonScope();
+container.bind(types_1.TYPES.HelpRes).to(help_res_1.HelpRes).inSingletonScope();
 container.bind(types_1.TYPES.ActivityGame).to(bot_presence_1.BotPresence).inSingletonScope();
 exports.default = container;
 //# sourceMappingURL=inversify.config.js.map

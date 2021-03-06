@@ -1,6 +1,6 @@
-import {inject, injectable} from "inversify";
-import {Message} from "discord.js";
-import {TYPES} from "../../types";
+import { inject, injectable } from "inversify";
+import { Message } from "discord.js";
+import { TYPES } from "../../types";
 
 @injectable()
 export class PingFinder {

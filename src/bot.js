@@ -21,8 +21,9 @@ const embed_roll_1 = require("./services/embed-roll");
 const cron_message_saint_1 = require("./services/cron-message-saint");
 const message_saint_1 = require("./services/message.saint");
 const ping_finder_1 = require("./commands/ping-finder");
+const help_res_1 = require("./services/help-res");
 let Bot = class Bot {
-    constructor(client, token, botPresence, embedRoll, cronSaintMessage, saintMessage, pingfinder) {
+    constructor(client, token, botPresence, embedRoll, cronSaintMessage, saintMessage, pingfinder, helpRes) {
         this.client = client;
         this.token = token;
         this.embedRoll = embedRoll;
@@ -30,6 +31,7 @@ let Bot = class Bot {
         this.cronSaintMessage = cronSaintMessage;
         this.saintMessage = saintMessage;
         this.pingfinder = pingfinder;
+        this.helpRes = helpRes;
     }
     listen() {
         this.client.on('message', (message) => {
@@ -52,6 +54,11 @@ let Bot = class Bot {
                 console.log("Message not sent");
             }).catch(() => {
                 console.log("Message sent.");
+            });
+            this.helpRes.handle(message).then(() => {
+                console.log("Response sent!");
+            }).catch(() => {
+                console.log("Response not sent.");
             });
         });
         this.client.on('ready', () => {
@@ -78,11 +85,13 @@ Bot = __decorate([
     __param(4, inversify_1.inject(types_1.TYPES.CronSaintMessage)),
     __param(5, inversify_1.inject(types_1.TYPES.SaintMessage)),
     __param(6, inversify_1.inject(types_1.TYPES.PingFinder)),
+    __param(7, inversify_1.inject(types_1.TYPES.HelpRes)),
     __metadata("design:paramtypes", [discord_js_1.Client, String, bot_presence_1.BotPresence,
         embed_roll_1.EmbedRoll,
         cron_message_saint_1.CronSaintMessage,
         message_saint_1.SaintMessage,
-        ping_finder_1.PingFinder])
+        ping_finder_1.PingFinder,
+        help_res_1.HelpRes])
 ], Bot);
 exports.Bot = Bot;
 //# sourceMappingURL=bot.js.map

@@ -64,7 +64,10 @@ let EmbedRoll = class EmbedRoll {
         setTimeout(() => {
             const channel = message.guild.channels.cache
                 .find((channel) => channel.name.startsWith("appel"));
-            channel.delete();
+            if (channel) {
+                channel.delete();
+            }
+            return;
         }, 10000);
         return Promise.reject();
     }

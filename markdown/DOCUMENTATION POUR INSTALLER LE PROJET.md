@@ -71,10 +71,13 @@ Dans votre terminal d'éditeur de code ou dans un terminal Windows, tapez :
 
 ## Étape 5 - Lancer le bot AttendanceBot
 
-Dans votre terminal d'éditeur de code ou dans un terminal Windows, tapez :
-1. _npm i_ --> récupère les dernières commandes de NodeJS.
+Dans votre terminal d'éditeur de code ou dans un terminal Windows à la racine du projet, tapez :
+1. _npm i_ --> récupère les dernières commandes de NodeJS et compile.
 
-1. _npm start_ --> lance le serveur et le bot.  
+1. _npm run watch_ --> récupère les dernières commandes de NodeJS et compile.
+
+Dans un **autre terminal** d'éditeur de code ou **autre terminal** Windows à la racine du projet, tapez :
+1. _npm start_ --> lance le serveur et le bot. 
 
 1. Votre bot fonctionne ! Vous êtes prêt pour bénéficier des différentes fonctions d'AttendanceBot que vous pouvez retrouver dans notre _USER STORY - SCENARIO GLOBAL_ toujours dans ce dossier **markdown**.
 
@@ -84,4 +87,4 @@ Dans votre terminal d'éditeur de code ou dans un terminal Windows, tapez :
 
 1. Pour arrêter le serveur, appuyez sur les touches : **Ctrl** + **C** et confirmez avec "_o_".
 
-1. Enfin, fermez votre terminal avec en tapant "_exit_".
+1. Enfin, fermez tous vos terminaux avec en tapant "_exit_".

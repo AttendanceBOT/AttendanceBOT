@@ -1,10 +1,9 @@
-import {Message, Client} from "discord.js";
-import {inject, injectable} from "inversify";
-import {TYPES} from "../../types";
-import {DateFormat} from "../utils/date";
+import { Message, Client } from "discord.js";
+import { inject, injectable } from "inversify";
+import { TYPES } from "../../types";
+import { DateFormat } from "../utils/date";
 
 const axios = require('axios');
-
 
 @injectable()
 export class SaintMessage {
@@ -12,9 +11,8 @@ export class SaintMessage {
     private readonly key: string;
     private client: Client;
 
-
     constructor(@inject(TYPES.DateFormat) dateFormat: DateFormat,
-                @inject(TYPES.Key) key: string, @inject(TYPES.Client) client: Client) {
+        @inject(TYPES.Key) key: string, @inject(TYPES.Client) client: Client) {
         this.dateFormat = dateFormat;
         this.key = key;
         this.client = client;
