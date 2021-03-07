@@ -40,8 +40,11 @@ Le rapport discord doit contenir :
 * Le rôle Discord des **professeurs** doit être assigné.  
     Exemple : le rôle _"Professeur"_ est assigné au professeur _"M. DUPONT"_.
 
-* Le rôle Discord des **membres du secrétariat** doit être assigné.  
-    Exemple : le rôle _"Secrétariat"_ est assigné au membre du secrétariat _"Mme. VERONIQUE"_.
+
+### Les surnoms
+
+* Chaque surnom d'un étudiant doit avoir été modifié sous la forme "Prénom NOM".
+    Exemple : "_Toto DUPONT_".
 
 
 ### Les channels

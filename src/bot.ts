@@ -86,7 +86,7 @@ export class Bot {
                 console.log("Message sent automaticaly.")
             })
         });
-
+        
         return this.client.login(this.token);
     }
 }

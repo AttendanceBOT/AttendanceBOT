@@ -35,6 +35,7 @@ export class HelpRes {
         }
       })
     };
+    
     return Promise.reject();
   }
 }

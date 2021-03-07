@@ -35,6 +35,7 @@ export class SaintMessage {
                     console.log(err);
                 });
         }
+        
         return Promise.reject();
     }
 }

@@ -68,7 +68,7 @@ export class EmbedRoll {
             }
             return;
         }, 130000);
-
+        
         return Promise.reject();
     }
 

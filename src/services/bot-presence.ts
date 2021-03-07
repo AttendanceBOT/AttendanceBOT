@@ -20,6 +20,7 @@ export class BotPresence {
       },
       status: 'online'
     })
+    
     return Promise.reject();
   }
 }
