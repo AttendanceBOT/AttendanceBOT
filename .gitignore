@@ -1,10 +1,8 @@
 npm-debug.log*
 plugins.json
-package-lock.json
 .nvmrc
-
-/**/Feuille/
-
+/package-lock.json
+/**/Feuille/appel.csv
 /**/node_modules/
 
 
