@@ -24,11 +24,11 @@ export class FileRoll {
             id: 'Id',
             Name: 'Nom',
             State: 'Présence en cours visio',
-            Date: 'Date'
+            Date: 'Date ' + this.dateFormat.dateCSV()
         };
 
         for (var i = 1; i < students.length; i++) {
-            data.push([i, students[i], "OK", this.dateFormat.dateCSV()]);
+            data.push([i, students[i], "OK", ""]);
         }
 
         stringify(data, { header: true, columns: columns }, (err, output) => {
