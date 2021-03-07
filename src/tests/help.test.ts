@@ -53,7 +53,6 @@ describe('Help resultat', () => {
 
         await service.handle(mockedMessageInstance);
 
-
         verify(mockedMessageClass.channel.send(embedHelp)).once();
     })
 
