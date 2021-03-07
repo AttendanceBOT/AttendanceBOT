@@ -43,7 +43,7 @@ Le rapport discord doit contenir :
 
 ### Les surnoms
 
-* Chaque surnom d'un étudiant doit avoir été modifié sous la forme "Prénom NOM".
+* Chaque surnom d'un étudiant doit avoir été modifié sous la forme "Prénom NOM".  
     Exemple : "_Toto DUPONT_".
 
 
