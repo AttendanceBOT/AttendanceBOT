@@ -15,10 +15,11 @@ export class CronSaintMessage {
     constructor(
         @inject(TYPES.DateFormat) dateFormat: DateFormat,
         @inject(TYPES.Key) key: string,
-        @inject(TYPES.Client) client: Client) {
-            this.dateFormat = dateFormat;
-            this.key = key;
-            this.client = client;
+        @inject(TYPES.Client) client: Client
+    ) {
+        this.dateFormat = dateFormat;
+        this.key = key;
+        this.client = client;
     }
 
     handle(): Promise<Message | Message[]> {

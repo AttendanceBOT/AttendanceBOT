@@ -37,23 +37,23 @@ let FileRoll = class FileRoll {
         stringify(data, { header: true, columns: columns }, (err, output) => {
             if (err)
                 throw err;
-            fs.writeFile('Feuille/my.csv', output, (err) => {
+            fs.writeFile('Feuille/appel.csv', output, (err) => {
                 if (err)
                     throw err;
-                console.log('my.csv saved.');
+                console.log('appel.csv saved.');
             });
         });
         const message = {
             embed: {
                 color: 15158332,
-                title: "Voici le lien de la feuille d'appel",
+                title: "Voici votre feuille d'appel",
                 image: {
                     url: urlImage,
                 }
             },
             files: [{
-                    attachment: "Feuille/my.csv",
-                    name: 'my.csv'
+                    attachment: "Feuille/appel.csv",
+                    name: 'appel.csv'
                 }]
         };
         return message;

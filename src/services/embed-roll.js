@@ -53,7 +53,7 @@ let EmbedRoll = class EmbedRoll {
                 channelCreate.send({
                     embed: {
                         color: 3447003,
-                        description: "Veuillez cliquer sur l'émoji"
+                        description: "Veuillez cliquer sur l'émoji :white_check_mark: ci-dessous afin de valider votre présence en cours"
                     }
                 }).then((sentMessage) => __awaiter(this, void 0, void 0, function* () {
                     yield sentMessage.react("✅").then(() => {

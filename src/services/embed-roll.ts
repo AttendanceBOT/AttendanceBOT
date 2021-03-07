@@ -43,7 +43,7 @@ export class EmbedRoll {
                 channelCreate.send({
                     embed: {
                         color: 3447003,
-                        description: "Veuillez cliquer sur l'émoji"
+                        description: "Veuillez cliquer sur l'émoji :white_check_mark: ci-dessous afin de valider votre présence en cours"
                     }
                 }).then(
                     async sentMessage => {

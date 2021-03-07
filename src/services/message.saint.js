@@ -30,7 +30,7 @@ let SaintMessage = class SaintMessage {
         if (this.saintTrigger.isTrigger(message.content)) {
             axios.get(`http://fetedujour.fr/api/v2/${this.key}/json-normal-${this.dateFormat.dayAPI()}-${this.dateFormat.monthAPI()}`)
                 .then((res) => {
-                message.channel.send(`Nous sommes le ${this.dateFormat.dateFR()}, bonne fête aux ${res.data.name}`);
+                message.channel.send(`Nous sommes le ${this.dateFormat.dateFR()}, bonne fête aux **${res.data.name}** !`);
             })
                 .catch((err) => {
                 console.log(err);
@@ -42,8 +42,11 @@ let SaintMessage = class SaintMessage {
 SaintMessage = __decorate([
     inversify_1.injectable(),
     __param(0, inversify_1.inject(types_1.TYPES.DateFormat)),
-    __param(1, inversify_1.inject(types_1.TYPES.Key)), __param(2, inversify_1.inject(types_1.TYPES.Client)), __param(3, inversify_1.inject(types_1.TYPES.SaintTrigger)),
-    __metadata("design:paramtypes", [date_1.DateFormat, String, discord_js_1.Client, saint_trigger_1.SaintTrigger])
+    __param(1, inversify_1.inject(types_1.TYPES.Key)),
+    __param(2, inversify_1.inject(types_1.TYPES.Client)),
+    __param(3, inversify_1.inject(types_1.TYPES.SaintTrigger)),
+    __metadata("design:paramtypes", [date_1.DateFormat, String, discord_js_1.Client,
+        saint_trigger_1.SaintTrigger])
 ], SaintMessage);
 exports.SaintMessage = SaintMessage;
 //# sourceMappingURL=message.saint.js.map

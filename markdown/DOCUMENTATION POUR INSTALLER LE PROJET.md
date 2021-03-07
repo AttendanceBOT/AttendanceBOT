@@ -9,6 +9,8 @@
 
 1. Avoir le logiciel Discord installé depuis le [site officiel](https://discord.com/download) et un compte Discord crée.
 
+1. Avoir la dernière version de NODE.JS installé depuis le [site officiel](https://nodejs.org/fr/download/).
+
 
 
 ## Étape 1 - Installation de l'environnement

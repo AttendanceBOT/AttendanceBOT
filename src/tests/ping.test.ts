@@ -1,12 +1,12 @@
 import "reflect-metadata";
 import 'mocha';
-import {expect} from 'chai';
-import {AppelTrigger} from "../commands/appel-trigger"
-import {EmbedRoll} from "../services/embed-roll";
-import {instance, mock, verify, when} from "ts-mockito";
-import {Message} from "discord.js";
-import {DateFormat} from "../utils/date";
-import {FileRoll} from "../services/file-roll";
+import { expect } from 'chai';
+import { AppelTrigger } from "../commands/appel-trigger"
+import { EmbedRoll } from "../services/embed-roll";
+import { instance, mock, verify, when } from "ts-mockito";
+import { Message } from "discord.js";
+import { DateFormat } from "../utils/date";
+import { FileRoll } from "../services/file-roll";
 
 describe('EmbedRoll', () => {
     let mockedPingFinderClass: AppelTrigger;

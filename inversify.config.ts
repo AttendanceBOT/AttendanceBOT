@@ -11,8 +11,8 @@ import { SaintMessage } from "./src/services/message.saint";
 import { BotPresence } from "./src/services/bot-presence";
 import { HelpTrigger } from "./src/commands/help-trigger";
 import { HelpRes } from "./src/services/help-res";
-import {FileRoll} from "./src/services/file-roll";
-import {SaintTrigger} from "./src/commands/saint-trigger";
+import { FileRoll } from "./src/services/file-roll";
+import { SaintTrigger } from "./src/commands/saint-trigger";
 
 let container = new Container();
 
