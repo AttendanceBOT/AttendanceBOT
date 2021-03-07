@@ -22,7 +22,7 @@ export class HelpRes {
           description: "AttendanceBot est un bot vous permettant de réaliser l'appel à votre place. Voici la liste des fonctions avec un exemple associé pour utiliser AttendanceBot.\n",
           fields: [{
             name: "Commande 1 - Lancer un appel : !appel",
-            value: "• __Commande :__ **!appel** @Groupe xxx (nom du rôle du groupe : jusqu'à 4 groupes possibles). \n\n • __Description :__ seuls les personnes ayant le rôle _@Professeur_ peuvent lancer cette commande. Les personnes ayant le rôle désigné dans l'appel verront un salon _appel-xxxxx_ se créer et devront réagir avec :white_check_mark: pour valider leurs présences. \n\n :warning: Attention, un appel ne dure que 2 minutes. :warning: \n\n Au bout de ces 2 minutes, l'appel est terminée. La feuille de présence est envoyée directement au professeur par message privé au format .CSV. Le salon se supprime 10 secondes après. \n\n • __Exemple :__ ```!appel @Groupe 201```\n\n"
+            value: "• __Commande :__ **!appel** @Groupe xxx (nom du rôle du groupe : jusqu'à 4 groupes possibles). \n\n • __Description :__ seuls les personnes ayant le rôle _@Professeur_ peuvent lancer cette commande. Les personnes ayant le rôle désigné dans l'appel verront un salon _appel-xxxxx_ se créer et devront réagir avec :white_check_mark: pour valider leurs présences. \n\n :warning: Attention, un appel ne dure que 2 minutes. :warning: \n\n Au bout de ces 2 minutes, l'appel est terminé. La feuille de présence est envoyée directement au professeur par message privé au format .CSV. Le salon se supprime 10 secondes après. \n\n • __Exemple :__ ```!appel @Groupe 201```\n\n"
           },
           {
             name: "Commande 2 - Redemander la liste des commandes possibles : !help",
