@@ -65,7 +65,7 @@
 
 ## Action 8 : En tant que bot, quand l’appel est terminé, je peux générer la feuille de présence :ballot_box_with_check: 
 
-* 2 minutes après le début de l'appel, lorsque ce dernier est terminé, le bot envoie le fichier directement par message privé au professeur
+* 2 minutes après le début de l'appel, lorsque ce dernier est terminé, le bot envoie le fichier directement par message privé au professeur.
 * Il peut alors cliquer sur le lien pour télécharger sa feuille.
 
 
